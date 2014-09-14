@@ -33,6 +33,35 @@
  */
 class Jmuser extends CActiveRecord
 {
+    public function birth() {
+        $IDCard = $this->idcard;
+        if(strlen($IDCard)==18){
+            $tyear=intval(substr($IDCard,6,4));
+            $tmonth=intval(substr($IDCard,10,2));
+            $tday=intval(substr($IDCard,12,2));
+            $tdate=$tyear."-".$tmonth."-".$tday;
+        }elseif(strlen($IDCard)==15){
+            $tyear=intval("19".substr($IDCard,6,2));
+            $tmonth=intval(substr($IDCard,8,2));
+            $tday=intval(substr($IDCard,10,2));
+            
+            $tdate=$tyear."-".$tmonth."-".$tday;
+        }
+        return $tdate;
+    }
+    public function age() {
+        $IDCard = $this->idcard;
+        if(strlen($IDCard)==18){
+            $tyear=intval(substr($IDCard,6,4));
+            $tmonth=intval(substr($IDCard,10,2));
+            $tday=intval(substr($IDCard,12,2));
+        }elseif(strlen($IDCard)==15){
+            $tyear=intval("19".substr($IDCard,6,2));
+            $tmonth=intval(substr($IDCard,8,2));
+            $tday=intval(substr($IDCard,10,2));
+        }
+        return date("Y") - $tyear;
+    }
 	/**
 	 * @return string the associated database table name
 	 */
@@ -49,7 +78,7 @@ class Jmuser extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('oa, password, wave, name, level, gender, phone, bq, depart, onboardtime, hotel, room, roommate, idcard, endorse, city, huji', 'required'),
+			array('oa,  wave, name, level, gender, phone, bq, depart, hotel, room, roommate, idcard, endorse, city, huji', 'required'),
 			array('oa', 'length', 'max'=>64),
 			array('password, wave, name, level, gender, phone, bq, depart, race, nation, height, weight, eat, friendname, friendphone, friendaddr, onboardtime, hotel, room, roommate, idcard, endorse, city, huji', 'length', 'max'=>128),
 			// The following rule is used by search().
@@ -62,7 +91,6 @@ class Jmuser extends CActiveRecord
 		return array(
 				'id',
 				'oa',
-				'password',
 				'wave',
 				'name',
 				'level',
@@ -70,6 +98,7 @@ class Jmuser extends CActiveRecord
 				'phone',
 				'bq',
 				'depart',
+				'title',
 				'race',
 				'nation',
 				'height',

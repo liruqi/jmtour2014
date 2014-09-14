@@ -26,6 +26,12 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'id'); ?>
+		<?php echo $form->textField($model,'id'); ?>
+		<?php echo $form->error($model,'id'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'password'); ?>
@@ -71,6 +77,12 @@
 		<?php echo $form->labelEx($model,'depart'); ?>
 		<?php echo $form->textField($model,'depart',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'depart'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'title'); ?>
+		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->error($model,'title'); ?>
 	</div>
 
 	<div class="row">
@@ -167,6 +179,12 @@
 		<?php echo $form->labelEx($model,'huji'); ?>
 		<?php echo $form->textField($model,'huji',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'huji'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'extra'); ?>
+		<?php echo $form->textArea($model,'extra',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($model,'extra'); ?>
 	</div>
 
 	<div class="row buttons">

@@ -1,8 +1,8 @@
 CREATE DATABASE `jm2014`  DEFAULT CHARACTER SET "UTF8" ;
 use jm2014;
 CREATE TABLE jmuser (
-    id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    oa VARCHAR(64) NOT NULL,
+    oa VARCHAR(64) NOT NULL PRIMARY KEY,
+    id INTEGER NOT NULL ,
     password VARCHAR(128) NOT NULL,
     wave 	VARCHAR(128) NOT NULL,
     name 	VARCHAR(128) NOT NULL,
@@ -11,6 +11,7 @@ CREATE TABLE jmuser (
     phone	VARCHAR(128) NOT NULL,
     bq 	VARCHAR(128) NOT NULL,
     depart 	VARCHAR(128) NOT NULL,
+    title 	VARCHAR(128) NOT NULL,
     race 	VARCHAR(128) NOT NULL,
     nation 	VARCHAR(128) NOT NULL,
     height 	VARCHAR(128) NOT NULL,
@@ -26,6 +27,9 @@ CREATE TABLE jmuser (
     idcard 	VARCHAR(128) NOT NULL,
     endorse 	VARCHAR(128) NOT NULL,
     city 	VARCHAR(128) NOT NULL,
-    huji 	VARCHAR(128) NOT NULL
+    huji 	VARCHAR(128) NOT NULL,
+    KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET "UTF8";
+
+alter table jmuser add column extra text default '';
 

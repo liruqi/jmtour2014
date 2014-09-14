@@ -71,7 +71,7 @@ class JmuserController extends Controller
 		{
 			$model->attributes=$_POST['Jmuser'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->oa));
 		}
 
 		$this->render('create',array(
@@ -95,7 +95,7 @@ class JmuserController extends Controller
 		{
 			$model->attributes=$_POST['Jmuser'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->oa));
 		}
 
 		$this->render('update',array(

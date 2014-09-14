@@ -45,8 +45,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
 		'oa',
+		'id',
 		'password',
 		'wave',
 		'name',
@@ -56,6 +56,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'phone',
 		'bq',
 		'depart',
+		'title',
 		'race',
 		'nation',
 		'height',
@@ -72,6 +73,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'endorse',
 		'city',
 		'huji',
+		'extra',
 		*/
 		array(
 			'class'=>'CButtonColumn',

@@ -41,14 +41,15 @@ class SiteController extends Controller
                 $this->session_write_close($id, $session);
 
                 $model=Jmuser::model()->findByPk($id);
+                /*
                 $initpasswd = $model->idcard;
                 if (strlen($initpasswd) > 6) {
                     $initpasswd = substr($initpasswd, strlen($initpasswd)-6);
-                }
-                if ($initpasswd == $form['password']) {
-                    $this->redirect("?r=site/p1");
-                } else {
+                }*/
+                if ($model->password == $form['password']) {
                     $this->redirect("?r=site/r1");
+                } else {
+                    $this->redirect("?r=site/p1");
                 }
                 return;
             } else {
@@ -62,15 +63,22 @@ class SiteController extends Controller
 
 	public function actionP1()
 	{
-		$authCode = 0;
+		$errorCode = 0;
 		if (isset($_POST['LoginForm'])) {
+            $form = $_POST['LoginForm'];
             $id = strtoupper(Yii::app()->getUser()->getName());
             $model=Jmuser::model()->findByPk($id);
-            
-			$this->redirect('?r=site/p2');
-			return;
+            if ($form['password']===$form['passwd']) {
+                $model->password = $form['password'];
+                if ($model->save()) {
+			    $this->redirect('?r=site/p2');
+                return;
+                }
+                $errorCode = 2;
+            }
+            $errorCode = 1;
 		}
-		$this->renderPartial('p1');
+		$this->renderPartial('p1', array('error' => $errorCode));
 	}
 
     public function actionR1()
@@ -78,7 +86,11 @@ class SiteController extends Controller
 		$authCode = 0;
         $id = strtoupper(Yii::app()->getUser()->getName());
         $model=Jmuser::model()->findByPk($id);
-		$this->renderPartial('r1', array('Jmuser' => $model));
+        if (! $model) {
+            $this->redirect('?r=site');    
+            return;
+        }
+		$this->renderPartial('r1', array('user' => $model));
 	}
 
 	public function actionP2()
@@ -96,12 +108,27 @@ class SiteController extends Controller
 	}
 
 	public function actionP4()
-	{
-		if (isset($_POST['LoginForm'])) {
-			$this->redirect('?r=site/p5');
-			return;
-		}
-		$this->renderPartial('p4');
+    {
+        $id = strtoupper(Yii::app()->getUser()->getName());
+        $model=Jmuser::model()->findByPk($id);
+        if (! $model) {
+            $this->redirect('?r=site');    
+            return;
+        }
+        $errorMessage = "";
+        if (isset($_POST['LoginForm'])) {
+            $form=$_POST['LoginForm'];
+            foreach ($form as $k => $v) $model->$k = $v;
+            $model->extra = json_encode($_POST['Extra']);
+            if ($model->save()) {
+			    $this->redirect('?r=site/p5');
+                return;
+            }
+            $errorMessage = "保存失败 :(";
+        }
+
+        $model->extra = json_decode($model->extra, true);
+		$this->renderPartial('p4', array('user'=>$model, 'error' => $errorMessage));
 	}
 
 	public function actionP5()

@@ -9,7 +9,10 @@
 <script type="text/javascript" src="js/city.js"></script>
 <script type="text/javascript" src="js/xg.js"></script>
 <script type="text/javascript">
-	EvPNG.fix('body,div,ul,li,ol,dl,dt,dd,img,input,span,p,h1,h2,h3,h4,a,textarea');
+EvPNG.fix('body,div,ul,li,ol,dl,dt,dd,img,input,span,p,h1,h2,h3,h4,a,textarea');
+<?php
+if (! empty($error)) echo "alert('{$error}');";
+?>
 </script>
 <script type="text/javascript">
     window.onload = function(){
@@ -92,7 +95,7 @@
             <div class="El01_02">您好！<br />欢迎您参加【中脉科技2014员工台湾奖励旅游】，请于下方输入您的资料以完成报名流程，谢谢！</div>
       </div>
       <form action="<?php echo $_SERVER["REQUEST_URI"];?>" method="post">
-      <div class="Elements02">OA账号：<span>101017028</span></div>
+      <div class="Elements02">OA账号：<span><?php echo $user->oa; ?></span></div>
       <div class="main">
            <div class="main_Area01">
                <h2 class="mt00">一、个人信息（下列信息都为必填）</h2>
@@ -100,83 +103,83 @@
                     <ul class="main01_01 clearfix">
                          <li class="clearfix">
                               <span class="main_l">姓名：</span>
-                              <span class="main_r">张三</span>
+                              <span class="main_r"><?php echo $user->name; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">性别：</span>
-                              <span class="main_r">男</span>
+                              <span class="main_r"><?php echo $user->gender; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">身份证号码：</span>
-                              <span class="main_r">231121198411290053</span>
+                              <span class="main_r"><?php echo $user->idcard; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">出生日期：</span>
-                              <span class="main_r">1984-11-29</span>
+                              <span class="main_r"><?php echo $user->birth(); ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">年龄：</span>
-                              <span class="main_r">30</span>
+                              <span class="main_r"><?php echo $user->age(); ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">国籍：</span>
-                              <span class="main_r"><input name="LoginForm[nation]" type="text"/></span>
+                              <span class="main_r"><input name="LoginForm[nation]" value="<?php echo $user->nation; ?>" type="text"/></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">民族：</span>
-                              <span class="main_r"><input type="text"/></span>
+                              <span class="main_r"><input name="LoginForm[race]" value="<?php echo $user->race; ?>" type="text"/></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">联系电话：</span>
-                              <span class="main_r"><input type="text"/></span>
+                              <span class="main_r"><input name="LoginForm[phone]" value="<?php echo $user->phone; ?>" type="text"/></span>
                          </li>
                     </ul>
                     <ul class="main01_02">
                          <li class="clearfix">
                              <span class="main_l2">家庭住址：</span>
                              <div class="main_r2 clearfix">
-                                 <select id="s1" name="s1" class="main_rs">
+                                 <select id="s1" name="Extra[homecity]" value="<?php echo $user->extra['homecity']; ?>" class="main_rs">
                                      <option selected>请选择</option>
                                  </select>
-                                 <select id="s2" name="s2" class="main_rs">
+                                 <select id="s2" name="Extra[homearea]" value="<?php echo $user->extra['homearea']; ?>" class="main_rs">
                                      <option selected>请选择</option>
                                  </select>
-                                 <input type="text" class="main_rT" placeholder="请输入详细地址"/>
+                                 <input type="text" name="Extra[homeaddr]" value="<?php echo $user->extra['homeaddr']; ?>" class="main_rT" placeholder="请输入详细地址"/>
                              </div>
                          </li>
                          <li class="clearfix">
                              <span class="main_l2">户籍所在地：</span>
                              <div class="main_r2 clearfix">
-                                 <select id="s4" name="s4" class="main_rs">
+                                 <select id="s4" name="Extra[hukoucity]" class="main_rs">
                                      <option selected>请选择</option>
                                  </select>
-                                 <select id="s5" name="s5" class="main_rs">
+                                 <select id="s5" name="Extra[hukouarea]" class="main_rs">
                                      <option selected>请选择</option>
                                  </select>
-                                 <input type="text" class="main_rT" placeholder="请输入详细地址"/>
+                                 <input type="text" name="Extra[hukouaddr]" value="<?php echo $user->extra['hukouaddr']; ?>" class="main_rT" placeholder="请输入详细地址"/>
                              </div>
                          </li>
                     </ul>
                     <ul class="main01_03 clearfix">
                          <li class="clearfix">
                               <span class="main_l">所属板块：</span>
-                              <span class="main_r">总裁办</span>
+                              <span class="main_r"><?php echo $user->bq; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">部门：</span>
-                              <span class="main_r">研发部</span>
+                              <span class="main_r"><?php echo $user->depart; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">岗位职级：</span>
-                              <span class="main_r">总监</span>
+                              <span class="main_r"><?php echo $user->title; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">身高：</span>
-                              <span class="main_r"><input type="text"/></span>
+                              <span class="main_r"><input name="LoginForm[height]" value="<?php echo $user->height; ?>" type="text"/></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">体重：</span>
-                              <span class="main_r"><input type="text"/></span>
+                              <span class="main_r"><input name="LoginForm[weight]" value="<?php echo $user->weight; ?>" type="text"/></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">餐饮忌口：</span>
@@ -193,15 +196,15 @@
                     <ul class="main01_04 clearfix">
                          <li class="clearfix">
                               <span class="main_l">紧急联络人姓名：</span>
-                              <span class="main_r"><input type="text"/></span>
+                              <span class="main_r"><input name="LoginForm[friendname]" value="<?php echo $user->friendname; ?>" type="text"/></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">紧急联络人电话：</span>
-                              <span class="main_r"><input type="text"/></span>
+                              <span class="main_r"><input name="LoginForm[friendphone]" value="<?php echo $user->friendphone; ?>"type="text"/></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">紧急联络人地址：</span>
-                              <span class="main_r"><input type="text"/></span>
+                              <span class="main_r"><input name="LoginForm[friendaddr]" value="<?php echo $user->friendaddr; ?>"type="text"/></span>
                          </li>
                          </li>
                     </ul>

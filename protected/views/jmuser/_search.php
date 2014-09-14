@@ -12,13 +12,13 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
+		<?php echo $form->label($model,'oa'); ?>
+		<?php echo $form->textField($model,'oa',array('size'=>60,'maxlength'=>64)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'oa'); ?>
-		<?php echo $form->textField($model,'oa',array('size'=>60,'maxlength'=>64)); ?>
+		<?php echo $form->label($model,'id'); ?>
+		<?php echo $form->textField($model,'id'); ?>
 	</div>
 
 	<div class="row">
@@ -54,6 +54,11 @@
 	<div class="row">
 		<?php echo $form->label($model,'depart'); ?>
 		<?php echo $form->textField($model,'depart',array('size'=>60,'maxlength'=>128)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'title'); ?>
+		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>128)); ?>
 	</div>
 
 	<div class="row">
@@ -134,6 +139,11 @@
 	<div class="row">
 		<?php echo $form->label($model,'huji'); ?>
 		<?php echo $form->textField($model,'huji',array('size'=>60,'maxlength'=>128)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'extra'); ?>
+		<?php echo $form->textArea($model,'extra',array('rows'=>6, 'cols'=>50)); ?>
 	</div>
 
 	<div class="row buttons">
