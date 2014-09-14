@@ -27,8 +27,8 @@
             <div class="El01_01"><img src="images/u3.png" width="77" height="73" /></div>
             <div class="El01_02">您好！<br />欢迎您参加【中脉科技2014员工台湾奖励旅游】，请于下方输入您的资料以完成报名流程，谢谢！</div>
       </div>
-      <form action="" method="get">
-      <div class="Elements02">OA账号：<span>101017028</span></div>
+      <form action="<?php echo $_SERVER["REQUEST_URI"];?>" method="post">
+      <div class="Elements02">OA账号：<span><?php echo $user->oa; ?></span></div>
       <div class="main">
            <div class="main_Area01">
                <h2 class="mt00">一、个人信息（请务必填写真实的信息）</h2>
@@ -36,48 +36,53 @@
                     <ul class="main01_01 clearfix">
                          <li class="clearfix">
                               <span class="main_l">姓名：</span>
-                              <span class="main_r">张三</span>
+                              <span class="main_r"><?php echo $user->name; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">性别：</span>
-                              <span class="main_r">男</span>
+                              <span class="main_r"><?php echo $user->gender; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">身份证号码：</span>
-                              <span class="main_r">231121198411290053</span>
+                              <span class="main_r"><?php echo $user->idcard; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">出生日期：</span>
-                              <span class="main_r">1984-11-29</span>
+                              <span class="main_r"><?php echo $user->birth(); ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">年龄：</span>
-                              <span class="main_r">30</span>
+                              <span class="main_r"><?php echo $user->age(); ?></span>
                          </li>
                          <li class="clearfix">
-                              <span class="main_l">性别：</span>
-                              <span class="main_r"><span class="main_rin">男</span></span>
+                              <span class="main_l">国籍：</span>
+                              <span class="main_r main_rin"><?php echo $user->nation; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">民族：</span>
-                              <span class="main_r"><span class="main_rin">汉</span></span>
+                              <span class="main_r main_rin"><?php echo $user->race; ?></span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">联系电话：</span>
-                              <span class="main_r"><span class="main_rin">13012345678</span></span>
+                              <span class="main_r main_rin"><?php echo $user->phone; ?></span>
                          </li>
                     </ul>
                     <ul class="main01_02">
                          <li class="clearfix">
                              <span class="main_l2">家庭住址：</span>
                              <div class="main_r2 main_rr clearfix">
-                                   <span class="main_rin">北京市朝阳区曙光西里甲5号</span>
+                             <span class="main_rin">
+                            <?php echo $user->extra['homecity']."市".
+                                        $user->extra['homearea']. $user->extra['homeaddr']; ?></span>
                              </div>
                          </li>
                          <li class="clearfix">
                              <span class="main_l2">户籍所在地：</span>
                              <div class="main_r2 main_rr clearfix">
-                                   <span class="main_rin">北京市东城区东直门南大街5号</span>
+                                 <span class="main_rin">
+                            <?php echo $user->extra['hukoucity']."市".
+                                        $user->extra['hukouarea']. $user->extra['hukouaddr']; ?>
+                                </span>
                              </div>
                          </li>
                     </ul>
@@ -85,37 +90,37 @@
                          <li class="clearfix">
                               <span class="main_l">所属板块：</span>
                               <span class="main_r">
-                                   <span class="main_rin">总裁办</span>
+                              <span class="main_rin"><?php echo $user->bq; ?></span>
                               </span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">部门：</span>
                               <span class="main_r">
-                                   <span class="main_rin">研发部</span>
+                              <span class="main_rin"><?php echo $user->depart; ?></span>
                               </span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">岗位职级：</span>
                               <span class="main_r">
-                                   <span class="main_rin">总裁</span>
+                              <span class="main_rin"><?php echo $user->title; ?></span>
                               </span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">身高：</span>
                               <span class="main_r">
-                                   <span class="main_rin">175</span>
+                              <span class="main_rin"><?php echo $user->height; ?></span>
                               </span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">体重：</span>
                               <span class="main_r">
-                                   <span class="main_rin">70</span>
+                              <span class="main_rin"><?php echo $user->weight; ?></span>
                               </span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">餐饮忌口：</span>
                               <span class="main_r">
-                                   <span class="main_rin">无</span>
+                                   <span class="main_rin"><?php echo $user->eat; ?></span>
                               </span>
                          </li>
                     </ul>
@@ -123,19 +128,19 @@
                          <li class="clearfix">
                               <span class="main_l">紧急联络人姓名：</span>
                               <span class="main_r">
-                                   <span class="main_rin">李四</span>
+                                   <span class="main_rin"><?php echo $user->friendname; ?></span>
                               </span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">紧急联络人电话：</span>
                               <span class="main_r">
-                                   <span class="main_rin">18912345678</span>
+                              <span class="main_rin"><?php echo $user->friendphone; ?></span>
                               </span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">紧急联络人地址：</span>
                               <span class="main_r main_rr">
-                                   <span class="main_rin">北京市东城区东直门南大街</span>
+                                   <span class="main_rin"><?php echo $user->friendaddr; ?></span>
                               </span>
                          </li>
                          </li>
@@ -287,15 +292,15 @@
                     </li>
                     <li class="clearfix mli">
                          <span class="main_l">自选线路：</span>
-                         <span class="main_r main_rr"><span class="main_rin">养生之旅</span></span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['luxian']; ?></span></span>
                     </li>
                </ul>
            </div>
       </div>
       </form>
       <p class="Elements03">
-          <a href="5资料填写.html"><input type="submit" class="anniu" value="返回修改"/></a>
-          <a href="javascript:viod(0);" id="fz_02_turn"><input type="submit" class="anniu" value="确认提交"/></a>
+          <a href="?r=site/p4"><input type="submit" class="anniu" name="back" value="返回修改"/></a>
+          <a href="javascript:viod(0);" id="fz_02_turn"><input type="submit" class="anniu" name="ok" value="确认提交"/></a>
           <a href="javascript:viod(0)" onClick="javascript:window.print()"><input type="submit" class="anniu" value="打印"/></a>
       </p>
 </div>
@@ -303,7 +308,7 @@
 <div id="fz">
       <p class="fz_01"><span class="DUIQI fz_01_t"></span><span class="DUIQI">已确认核实个人报名信息</span></p>
       <p class="fz_02">
-          <a href="7旅行须知宣导页面.html"><input type="submit" class="anniu" value="是"/></a>
+          <a href="p6.html"><input type="submit" class="anniu" value="是"/></a>
           <a href="javascript:viod(0);" id="fz_02_close"><input type="submit" class="anniu" value="否"/></a>
       </p>
 </div>

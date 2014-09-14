@@ -128,17 +128,40 @@ class SiteController extends Controller
         }
 
         $model->extra = json_decode($model->extra, true);
+        if (! $model->extra['luxian']) $model->extra['luxian']="养生之旅";
 		$this->renderPartial('p4', array('user'=>$model, 'error' => $errorMessage));
 	}
 
 	public function actionP5()
-	{
-		if (isset($_POST['LoginForm'])) {
-			$this->redirect('?r=site/p6');
+    {
+        $oa = strtoupper(Yii::app()->getUser()->getName());
+        $model=Jmuser::model()->findByPk($oa);
+        if (! $model) {
+            $this->redirect('?r=site');
+            return;
+        }
+        if ("POST" == $_SERVER["REQUEST_METHOD"]) {
+            if (isset($_POST['ok'])) {
+                $this->redirect('?r=site/p6');
+            } else {
+                $this->redirect('?r=site/p4');
+            }
 			return;
 		}
-		$this->renderPartial('p5');
+        $model->extra = json_decode($model->extra, true);
+		$this->renderPartial('p5', array('user'=>$model));
 	}
+    
+    public function actionR5()
+    {
+        $oa = strtoupper(Yii::app()->getUser()->getName());
+        $model=Jmuser::model()->findByPk($oa);
+        if (! $model) {
+            $this->redirect('?r=site');
+            return;
+        }
+		$this->renderPartial('r5', array('user'=>$model));
+    }
 
 	/**
 	 * This is the action to handle external exceptions.

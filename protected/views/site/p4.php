@@ -5,20 +5,26 @@
 <title>填写资料</title>
 <link type="text/css" rel="stylesheet" href="css/style.css"/>
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/iepng.js"></script>
 <script type="text/javascript" src="js/city.js"></script>
 <script type="text/javascript" src="js/xg.js"></script>
 <script type="text/javascript">
-EvPNG.fix('body,div,ul,li,ol,dl,dt,dd,img,input,span,p,h1,h2,h3,h4,a,textarea');
 <?php
 if (! empty($error)) echo "alert('{$error}');";
 ?>
 </script>
 <script type="text/javascript">
-    window.onload = function(){
-           city();
-           sy();
-	  }
+window.onload = function(){
+    cities = city();
+    sy();
+//--------------------------------------------
+  //这是调用代码
+  var liandong=new CLASS_LIANDONG_YAO(cities); //设置数据源
+  liandong.firstSelectChange("根目录","s1"); //设置第一个选择框
+  liandong.subSelectChange("s1","s2"); //设置子级选择框
+
+  liandong.firstSelectChange("根目录","s4"); //设置第一个选择框
+  liandong.subSelectChange("s4","s5"); //设置子级选择框
+}
 </script>
 <script type="text/javascript" src="js/placeholder.js"></script>
 <script type="text/javascript">
@@ -36,52 +42,50 @@ if (! empty($error)) echo "alert('{$error}');";
 **    功能：多级联动菜单  
 **    作者：YAODAYIZI     
 **/  	
-  function CLASS_LIANDONG_YAO(array)
-  {
-   //数组，联动的数据源
-  	this.array=array; 
-  	this.indexName='';
-  	this.obj='';
-  	//设置子SELECT
-	// 参数：当前onchange的SELECT ID，要设置的SELECT ID
-      this.subSelectChange=function(selectName1,selectName2)
-  	{
-  	//try
-  	//{
+function CLASS_LIANDONG_YAO(cityinfo)
+{
+    //数组，联动的数据源
+    this.cityinfo=cityinfo; 
+    this.indexName='';
+    this.obj='';
+    //设置子SELECT
+    // 参数：当前onchange的SELECT ID，要设置的SELECT ID
+    this.subSelectChange=function(selectName1,selectName2) {
+    //try
+    //{
     var obj1=document.all[selectName1];
     var obj2=document.all[selectName2];
     var objName=this.toString();
     var me=this;
-    obj1.onchange=function()
-    {
-    	me.optionChange(this.options[this.selectedIndex].value,obj2.id)
+    obj1.onchange=function() {
+        me.optionChange(this.options[this.selectedIndex].value,obj2.id)
     }
-  	}
-  	//设置第一个SELECT
-	// 参数：indexName指选中项,selectName指select的ID
-  	this.firstSelectChange=function(indexName,selectName)  
-  	{
-  	this.obj=document.all[selectName];
-  	this.indexName=indexName;
-  	this.optionChange(this.indexName,this.obj.id)
-  	}
-  // indexName指选中项,selectName指select的ID
-  	this.optionChange=function (indexName,selectName)
-  	{
-    var obj1=document.all[selectName];
-    var me=this;
-    obj1.length=0;
-    obj1.options[0]=new Option("请选择",'');
-    for(var i=0;i<this.array.length;i++)
-    {	
-    	if(this.array[i][1]==indexName)
-    	{
-    	//alert(this.array[i][1]+" "+indexName);
-      obj1.options[obj1.length]=new Option(this.array[i][2],this.array[i][0]);
-    	}
+
     }
-  	}	
-  }
+    //设置第一个SELECT
+    // 参数：indexName指选中项,selectName指select的ID
+    this.firstSelectChange=function(indexName,selectName)  {
+        this.obj=document.all[selectName];
+        this.indexName=indexName;
+        this.optionChange(this.indexName,this.obj.id)
+    }
+    // indexName指选中项,selectName指select的ID
+    this.optionChange=function (indexName,selectName) {
+        var obj1=document.all[selectName];
+        var me=this;
+        obj1.length=0;
+        obj1.options[0]=new Option("请选择",'');
+        for(var i=0;i<this.cityinfo.length;i++)
+        {	
+            if(this.cityinfo[i][1]==indexName)
+            {
+                //alert(this.cityinfo[i][1]+" "+indexName);
+                var node =new Option(this.cityinfo[i][2],this.cityinfo[i][0]);
+                obj1.options[obj1.length] = node;
+            }
+        }
+    }	
+}
   </script>
 </head>
 <body>
@@ -184,11 +188,13 @@ if (! empty($error)) echo "alert('{$error}');";
                          <li class="clearfix">
                               <span class="main_l">餐饮忌口：</span>
                               <span class="main_r">
-                                     <select class="main_rsl">
-                                         <option>请选择</option>
-                                         <option>无</option>
-                                         <option>清真</option>
-                                         <option>素食</option>
+                                     <select class="main_rsl" name="LoginForm[eat]">
+                                        <option value="无">请选择</option>
+                                        <option value="无" <?php if ($user->eat=="无") echo "selected=selected "; ?>
+                                        >无</option>
+                                        <option value="清真" <?php if ($user->eat=="清真") echo "selected=selected "; ?>
+                                        >清真</option>
+                                        <option value="素食" <?php if ($user->eat=="素食") echo "selected=selected "; ?>>素食</option>
                                      </select>
                               </span>
                          </li>
@@ -215,12 +221,14 @@ if (! empty($error)) echo "alert('{$error}');";
                <div class="main03">
                     <ul class="clearfix">
                          <li class="clearfix">
-                              <label class="main03_01"><input type="radio" name="luxian" class="DUIQI" checked="checked"/><span class="DUIQI">养生之旅</span></label>
+                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="养生之旅" class="DUIQI" <?php if($user->extra['luxian']=="养生之旅") echo 'checked="checked"'; ?> />
+                              <span class="DUIQI">养生之旅</span></label>
                               <p class="main03_02">剩余数量：<span class="red">275</span></p>
                               <span class="main03_03">线路介绍<span class="main03_03_In"><img src="images/_u160.png"/></span></span>
                          </li>
                          <li class="clearfix">
-                              <label class="main03_01"><input type="radio" name="luxian" class="DUIQI"/><span class="DUIQI">文化之旅</span></label>
+                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="文化之旅" class="DUIQI" <?php if($user->extra['luxian']=="文化之旅") echo 'checked="checked"'; ?>/>
+                            <span class="DUIQI">文化之旅</span></label>
                               <p class="main03_02">剩余数量：<span class="red">128</span></p>
                               <span class="main03_03">线路介绍<span class="main03_03_In main03_03_In2"><img src="images/_u162.png"/></span></span>
                          </li>
