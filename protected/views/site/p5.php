@@ -5,13 +5,8 @@
 <title>资料确认</title>
 <link type="text/css" rel="stylesheet" href="css/style.css"/>
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/iepng.js"></script>
-<script type="text/javascript" src="js/city.js"></script>
 <script type="text/javascript" src="js/xg.js"></script>
 <script type="text/javascript" src="js/base.js"></script>
-<script type="text/javascript">
-	EvPNG.fix('body,div,ul,li,ol,dl,dt,dd,img,input,span,p,h1,h2,h3,h4,a,textarea');
-</script>
 <script type="text/javascript">
     window.onload = function(){
            sy();

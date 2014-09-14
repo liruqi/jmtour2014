@@ -118,13 +118,20 @@ class SiteController extends Controller
         $errorMessage = "";
         if (isset($_POST['LoginForm'])) {
             $form=$_POST['LoginForm'];
-            foreach ($form as $k => $v) $model->$k = $v;
-            $model->extra = json_encode($_POST['Extra']);
-            if ($model->save()) {
-			    $this->redirect('?r=site/p5');
-                return;
+            foreach ($form as $k => $v) {
+                $model->$k = $v;
+                if (empty($v)) {
+                    $errorMessage = "缺少字段: " . $k;
+                }
             }
-            $errorMessage = "保存失败 :(";
+            if ( empty($errorMessage) ) {
+                $model->extra = json_encode($_POST['Extra']);
+                if ($model->save()) {
+                    $this->redirect('?r=site/p5');
+                    return;
+                } 
+                $errorMessage = "保存失败 :(";
+            }
         }
 
         $model->extra = json_decode($model->extra, true);
@@ -160,6 +167,7 @@ class SiteController extends Controller
             $this->redirect('?r=site');
             return;
         }
+        $model->extra = json_decode($model->extra, true);
 		$this->renderPartial('r5', array('user'=>$model));
     }
 
