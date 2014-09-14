@@ -28,12 +28,24 @@
                   <div class="u_01 u_00 clearfix">
                         <span class="u_00l">OA登录名:</span>
                         <div class="u_00r"><input type="text" name="LoginForm[oa]" class="Input_box"/></div>
-                        <span class="u_tishi red"><i class="u_tishi_t DUIQI"></i><i class="DUIQI">此登录名不存在</i></span>
+                        <span class="u_tishi red">
+            <?php if ($authCode == 1) { ?>
+                        <i class="DUIQI">此登录名不存在</i>
+            <?php } else { ?>
+                        <i class="u_tishi_t DUIQI"></i>
+            <?php } ?>
+                        </span>
                   </div>
                   <div class="u_02 u_00 clearfix">
                         <span class="u_00l">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</span>
                         <div class="u_00r"><input type="password" name="LoginForm[password]" class="Input_box"/></div>
-                        <span class="u_tishi red"><i class="u_tishi_t DUIQI"></i><i class="DUIQI">您输入的密码有误</i></span>
+                        <span class="u_tishi red">
+            <?php if ($authCode == 2) { ?>
+                    <i class="DUIQI">您输入的密码有误</i>
+            <?php } else { ?>
+                    <i class="u_tishi_t DUIQI"></i>
+            <?php } ?>
+                        </span>
                   </div>
                   <p class="red Elements01">注：员工编号唯一，所有员工初始密码已经发送到您的手机上，登录后可以自行修改</p>
                   <p class="Elements02"><a href="2密码修改.html"><input type="submit" class="anniu" value="登录"/></a></p>

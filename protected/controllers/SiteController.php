@@ -29,22 +29,56 @@ class SiteController extends Controller
 	{
 		$authCode = 0;
 		if (isset($_POST['LoginForm'])) {
-			$this->redirect('?r=site/p1');
-			return;
+            $form = $_POST['LoginForm'];
+            $id = strtoupper($form['oa']);
+            $identity=new JmIdentity($id, $form['password']);
+            $authRet = $identity->authenticate();
+            if ($authRet) {
+                $duration= 3600*24; // 1 day
+                Yii::app()->user->login($identity,$duration);
+                $session = $this->session($id);
+                $session['oa'] = $id;
+                $this->session_write_close($id, $session);
+
+                $model=Jmuser::model()->findByPk($id);
+                $initpasswd = $model->idcard;
+                if (strlen($initpasswd) > 6) {
+                    $initpasswd = substr($initpasswd, strlen($initpasswd)-6);
+                }
+                if ($initpasswd == $form['password']) {
+                    $this->redirect("?r=site/p1");
+                } else {
+                    $this->redirect("?r=site/r1");
+                }
+                return;
+            } else {
+                $authCode = $identity->errorCode;
+            }
 		}
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->renderPartial('p0');
+		$this->renderPartial('p0', array('authCode' => $authCode));
 	}
 
 	public function actionP1()
 	{
 		$authCode = 0;
 		if (isset($_POST['LoginForm'])) {
+            $id = strtoupper(Yii::app()->getUser()->getName());
+            $model=Jmuser::model()->findByPk($id);
+            
 			$this->redirect('?r=site/p2');
 			return;
 		}
 		$this->renderPartial('p1');
+	}
+
+    public function actionR1()
+	{
+		$authCode = 0;
+        $id = strtoupper(Yii::app()->getUser()->getName());
+        $model=Jmuser::model()->findByPk($id);
+		$this->renderPartial('r1', array('Jmuser' => $model));
 	}
 
 	public function actionP2()
@@ -153,4 +187,19 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+
+    private function session($id) {
+        $filename = "/tmp/jmoa." . $id;
+        if (file_exists($filename)) {
+            $r = json_decode(file_get_contents($filename), TRUE);
+            if ($r) return $r;
+        }
+        return array();
+    }
+
+    private function session_write_close($id, $s) {
+        $filename = "/tmp/jmoa." . $id;
+        file_put_contents($filename, json_encode($s));
+    }
+
 }
