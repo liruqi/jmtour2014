@@ -116,6 +116,7 @@ class SiteController extends Controller
             return;
         }
         $errorMessage = "";
+        $routeCount = Jmroute::getRouteCount();
         if (isset($_POST['LoginForm'])) {
             $form=$_POST['LoginForm'];
             foreach ($form as $k => $v) {
@@ -124,19 +125,35 @@ class SiteController extends Controller
                     $errorMessage = "缺少字段: " . $k;
                 }
             }
+            if (! isset($_POST['Extra']['luxian'])) {
+                $errorMessage = "缺少字段: 路线选择" ;
+            }
+
             if ( empty($errorMessage) ) {
-                $model->extra = json_encode($_POST['Extra']);
-                if ($model->save()) {
-                    $this->redirect('?r=site/p5');
-                    return;
-                } 
-                $errorMessage = "保存失败 :(";
+                $luxian=$_POST['Extra']['luxian'];
+                
+                if (($routeCount[$luxian]) <= 0) {
+                    $errorMessage = "路线选择失败" ;
+                } else {
+                    $model->extra = json_encode($_POST['Extra']);
+                    if ($model->save()) {
+                        Jmroute::setRoute($id, $_POST['Extra']['luxian']);
+                        $this->redirect('?r=site/p5');
+                        return;
+                    } 
+                    $errorMessage = "保存失败 :(";
+                }
             }
         }
 
         $model->extra = json_decode($model->extra, true);
         if (! $model->extra['luxian']) $model->extra['luxian']="养生之旅";
-		$this->renderPartial('p4', array('user'=>$model, 'error' => $errorMessage));
+        //var_dump(Jmroute::getRouteCount());
+        $this->renderPartial('p4', 
+            array(
+                'user'=>$model, 'error' => $errorMessage, 'route' => $routeCount 
+            )
+        );
 	}
 
 	public function actionP5()

@@ -16,14 +16,20 @@ if (! empty($error)) echo "alert('{$error}');";
 window.onload = function(){
     cities = city();
     sy();
-//--------------------------------------------
-  //这是调用代码
-  var liandong=new CLASS_LIANDONG_YAO(cities); //设置数据源
-  liandong.firstSelectChange("根目录","s1"); //设置第一个选择框
-  liandong.subSelectChange("s1","s2"); //设置子级选择框
+    
+    //这是调用代码
+    var liandong=new CLASS_LIANDONG_YAO(cities); //设置数据源
+    var value = liandong.firstSelectChange("根目录","s1"); //设置第一个选择框
+    liandong.subSelectChange("s1","s2"); //设置子级选择框
+    if (value) {
+        liandong.optionChange(value, "s2")
+    }
 
-  liandong.firstSelectChange("根目录","s4"); //设置第一个选择框
-  liandong.subSelectChange("s4","s5"); //设置子级选择框
+    value = liandong.firstSelectChange("根目录","s4"); //设置第一个选择框
+    liandong.subSelectChange("s4","s5"); //设置子级选择框
+    if (value) {
+        liandong.optionChange(value, "s5")
+    }
 }
 </script>
 <script type="text/javascript" src="js/placeholder.js"></script>
@@ -51,26 +57,25 @@ function CLASS_LIANDONG_YAO(cityinfo)
     //设置子SELECT
     // 参数：当前onchange的SELECT ID，要设置的SELECT ID
     this.subSelectChange=function(selectName1,selectName2) {
-    //try
-    //{
-    var obj1=document.all[selectName1];
-    var obj2=document.all[selectName2];
-    var objName=this.toString();
-    var me=this;
-    obj1.onchange=function() {
-        me.optionChange(this.options[this.selectedIndex].value,obj2.id)
-    }
-
+        var obj1=document.all[selectName1];
+        var obj2=document.all[selectName2];
+        var objName=this.toString();
+        var me=this;
+        obj1.onchange=function() {
+            me.optionChange(this.options[this.selectedIndex].value, selectName2)
+        }
     }
     //设置第一个SELECT
     // 参数：indexName指选中项,selectName指select的ID
     this.firstSelectChange=function(indexName,selectName)  {
         this.obj=document.all[selectName];
         this.indexName=indexName;
-        this.optionChange(this.indexName,this.obj.id)
+        return this.optionChange(this.indexName,this.obj.id);
     }
+
     // indexName指选中项,selectName指select的ID
     this.optionChange=function (indexName,selectName) {
+        var value = null;
         var obj1=document.all[selectName];
         var me=this;
         obj1.length=0;
@@ -82,8 +87,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                 //alert(this.cityinfo[i][1]+" "+indexName);
                 var node =new Option(this.cityinfo[i][2],this.cityinfo[i][0]);
                 obj1.options[obj1.length] = node;
+                if (obj1.getAttribute("value") == this.cityinfo[i][0]) {
+                    node.selected = true;
+                    value = this.cityinfo[i][0];
+                }
             }
         }
+        return value;
     }	
 }
   </script>
@@ -154,10 +164,10 @@ function CLASS_LIANDONG_YAO(cityinfo)
                          <li class="clearfix">
                              <span class="main_l2">户籍所在地：</span>
                              <div class="main_r2 clearfix">
-                                 <select id="s4" name="Extra[hukoucity]" class="main_rs">
+                                 <select id="s4" name="Extra[hukoucity]" value="<?php echo $user->extra['hukoucity']; ?>" class="main_rs">
                                      <option selected>请选择</option>
                                  </select>
-                                 <select id="s5" name="Extra[hukouarea]" class="main_rs">
+                                 <select id="s5" name="Extra[hukouarea]" value="<?php echo $user->extra['hukouarea']; ?>" class="main_rs">
                                      <option selected>请选择</option>
                                  </select>
                                  <input type="text" name="Extra[hukouaddr]" value="<?php echo $user->extra['hukouaddr']; ?>" class="main_rT" placeholder="请输入详细地址"/>
@@ -223,13 +233,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                          <li class="clearfix">
                          <label class="main03_01"><input type="radio" name="Extra[luxian]" value="养生之旅" class="DUIQI" <?php if($user->extra['luxian']=="养生之旅") echo 'checked="checked"'; ?> />
                               <span class="DUIQI">养生之旅</span></label>
-                              <p class="main03_02">剩余数量：<span class="red">275</span></p>
+                              <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R1]; ?></span></p>
                               <span class="main03_03">线路介绍<span class="main03_03_In"><img src="images/_u160.png"/></span></span>
                          </li>
                          <li class="clearfix">
                          <label class="main03_01"><input type="radio" name="Extra[luxian]" value="文化之旅" class="DUIQI" <?php if($user->extra['luxian']=="文化之旅") echo 'checked="checked"'; ?>/>
                             <span class="DUIQI">文化之旅</span></label>
-                              <p class="main03_02">剩余数量：<span class="red">128</span></p>
+                              <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R2]; ?></span></p>
                               <span class="main03_03">线路介绍<span class="main03_03_In main03_03_In2"><img src="images/_u162.png"/></span></span>
                          </li>
                     </ul>
