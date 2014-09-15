@@ -4,13 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>密码修改成功</title>
 <link type="text/css" rel="stylesheet" href="css/style.css"/>
-<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="js/iepng.js"></script>
-<script type="text/javascript">
-    window.onload = function(){
-
-	  }
-</script>
 </head>
 <body>
 <div class="zmlogo"></div>

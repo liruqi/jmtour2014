@@ -4,16 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>登陆</title>
 <link type="text/css" rel="stylesheet" href="css/style.css"/>
-<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="js/iepng.js"></script>
-<script type="text/javascript">
-	EvPNG.fix('body,div,ul,li,ol,dl,dt,dd,img,input,span,p,h1,h2,h3,h4,a,textarea');
-</script>
-<script type="text/javascript">
-    window.onload = function(){
-
-	  }
-</script>
 </head>
 <body>
 <div class="zmlogo"></div>

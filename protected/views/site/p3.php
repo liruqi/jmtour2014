@@ -4,16 +4,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>免责条款</title>
 <link type="text/css" rel="stylesheet" href="css/style.css"/>
-<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="js/iepng.js"></script>
-<script type="text/javascript">
-	EvPNG.fix('body,div,ul,li,ol,dl,dt,dd,img,input,span,p,h1,h2,h3,h4,a,textarea');
-</script>
-<script type="text/javascript">
-    window.onload = function(){
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+<script language="javascript"> 
+   //表单验证 
+   function check(){               
+      var ids = document.getElementsByName("LoginForm[accept]");               
+      var flag = false ;               
+      for(var i=0;i<ids.length;i++){ 
+         if(ids[i].checked){ 
+            flag = true ; 
+            break ; 
+         } 
+      } 
+      if(!flag){ 
+         alert("您尚未同意本条款！"); 
+         return false ; 
+      }else{
+          window.location.href='5资料填写.html';
+         return false ; 
+         }
+   } 
+</script> 
 
-	  }
-</script>
 </head>
 <body>
 <div class="zmlogo"></div>
