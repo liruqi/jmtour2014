@@ -5,12 +5,13 @@
 <title>资料确认</title>
 <link type="text/css" rel="stylesheet" href="css/style.css"/>
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/xg.js"></script>
 <script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/xg.js"></script>
 <script type="text/javascript">
-    window.onload = function(){
-           sy();
-	  }
+window.onload = function(){
+    yy();
+    xy();
+}
 </script>
 </head>
 <body>
@@ -295,9 +296,9 @@
       </div>
       </form>
       <p class="Elements03">
-          <a href="?r=site/p4"><input type="submit" class="anniu" name="back" value="返回修改"/></a>
-          <a href="javascript:viod(0);" id="fz_02_turn"><input type="submit" class="anniu" name="ok" value="确认提交"/></a>
-          <a href="javascript:viod(0)" onClick="javascript:window.print()"><input type="submit" class="anniu" value="打印"/></a>
+          <a href="?r=site/p4" class="anniu" name="back" >返回修改</a>
+          <a href="javascript:void(0);" id="fz_02_turn"><input type="submit" class="anniu" name="ok" value="确认提交"/></a>
+          <a class="anniu" href="javascript:void(0)" onClick="javascript:window.print()">打印</a>
       </p>
 </div>
 <div id="top"></div>
@@ -305,7 +306,7 @@
       <p class="fz_01"><span class="DUIQI fz_01_t"></span><span class="DUIQI">已确认核实个人报名信息</span></p>
       <p class="fz_02">
           <a href="p6.html"><input type="submit" class="anniu" value="是"/></a>
-          <a href="javascript:viod(0);" id="fz_02_close"><input type="submit" class="anniu" value="否"/></a>
+          <a href="javascript:void(0);" id="fz_02_close"><input type="submit" class="anniu" value="否"/></a>
       </p>
 </div>
 </body>

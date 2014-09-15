@@ -15,7 +15,7 @@ if (! empty($error)) echo "alert('{$error}');";
 <script type="text/javascript">
 window.onload = function(){
     cities = city();
-    sy();
+    xy();
     
     //这是调用代码
     var liandong=new CLASS_LIANDONG_YAO(cities); //设置数据源

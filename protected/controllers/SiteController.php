@@ -119,14 +119,16 @@ class SiteController extends Controller
         $routeCount = Jmroute::getRouteCount();
         if (isset($_POST['LoginForm'])) {
             $form=$_POST['LoginForm'];
+            $translate = $model->attributeLabels();
             foreach ($form as $k => $v) {
                 $model->$k = $v;
                 if (empty($v)) {
-                    $errorMessage = "缺少字段: " . $k;
+                    $fieldName = isset($translate[$k]) ? $translate[$k]:$k;
+                    $errorMessage = "所有信息均为必填，缺少信息: " . $fieldName;
                 }
             }
             if (! isset($_POST['Extra']['luxian'])) {
-                $errorMessage = "缺少字段: 路线选择" ;
+                $errorMessage = "所有信息均为必填，缺少信息: 路线选择" ;
             }
 
             if ( empty($errorMessage) ) {
