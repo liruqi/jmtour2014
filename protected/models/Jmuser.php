@@ -135,10 +135,10 @@ class Jmuser extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'oa' => 'Oa',
+			'oa' => 'OA账号',
 			'password' => 'Password',
 			'wave' => 'Wave',
-			'name' => 'Name',
+			'name' => '姓名',
 			'level' => 'Level',
 			'gender' => 'Gender',
 			'phone' => 'Phone',
@@ -209,7 +209,10 @@ class Jmuser extends CActiveRecord
 		$criteria->compare('huji',$this->huji,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+            'criteria'=>$criteria,
+            'pagination'=>array(
+                'pageSize'=> 500,
+            ),
 		));
 	}
 

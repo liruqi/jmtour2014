@@ -29,11 +29,11 @@ class JmuserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'users'=>array('admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'users'=>array('admin'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
@@ -91,16 +91,49 @@ class JmuserController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Jmuser']))
-		{
-			$model->attributes=$_POST['Jmuser'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->oa));
-		}
+        if (! $model) {
+            $this->redirect('?r=jmuser/admin');    
+            return;
+        }
+        $errorMessage = "";
+        $routeCount = Jmroute::getRouteCount();
+        if (isset($_POST['LoginForm'])) {
+            $form=$_POST['LoginForm'];
+            foreach ($form as $k => $v) {
+                $model->$k = $v;
+                if (empty($v)) {
+                    $errorMessage = "缺少字段: " . $k;
+                }
+            }
+            if (! isset($_POST['Extra']['luxian'])) {
+                $errorMessage = "缺少字段: 路线选择" ;
+            }
 
-		$this->render('update',array(
-			'model'=>$model,
-		));
+            if ( empty($errorMessage) ) {
+                $luxian=$_POST['Extra']['luxian'];
+                
+                if (($routeCount[$luxian]) <= 0) {
+                    $errorMessage = "路线选择失败" ;
+                } else {
+                    $model->extra = json_encode($_POST['Extra']);
+                    if ($model->save()) {
+                        Jmroute::setRoute($id, $_POST['Extra']['luxian']);
+                        $this->redirect('?r=jmuser/admin');
+                        return;
+                    } 
+                    $errorMessage = "保存失败 :(";
+                }
+            }
+        }
+
+        $model->extra = json_decode($model->extra, true);
+        if (! $model->extra['luxian']) $model->extra['luxian']="养生之旅";
+        //var_dump(Jmroute::getRouteCount());
+        $this->renderPartial('update', 
+            array(
+                'user'=>$model, 'error' => $errorMessage, 'route' => $routeCount 
+            )
+        );
 	}
 
 	/**
@@ -122,7 +155,13 @@ class JmuserController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Jmuser');
+        $dataProvider=new CActiveDataProvider('Jmuser',
+            array(
+                'pagination' => array (
+                    'pageSize' => 500
+                ),
+            )
+        );
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
