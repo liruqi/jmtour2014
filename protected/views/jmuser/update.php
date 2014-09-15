@@ -244,13 +244,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                    <li class="clearfix mli">
                                         <span class="main_l">通行证签发日期：</span>
                                         <span class="main_r">
-                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                               <input type="text" value="2014-05-06"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">通行证有效日期：</span>
                                         <span class="main_r">
-                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                               <input type="text" value="2014-05-06"/>
                                         </span>
                                    </li>
                               </ul>
@@ -261,13 +261,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                    <li class="clearfix mli">
                                         <span class="main_l">签注签发日期：</span>
                                         <span class="main_r">
-                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                               <input type="text" value="2014-05-06"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">签注有效期：</span>
                                         <span class="main_r">
-                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                               <input type="text" value="2014-05-06"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
@@ -292,13 +292,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                    <li class="clearfix mli">
                                         <span class="main_l">通行证签发日期：</span>
                                         <span class="main_r">
-                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                               <input type="text" value="2014-05-06"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">通行证有效日期：</span>
                                         <span class="main_r">
-                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                               <input type="text" value="2014-05-06"/>
                                         </span>
                                    </li>
                               </ul>
@@ -309,13 +309,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                    <li class="clearfix mli">
                                         <span class="main_l">签注签发日期：</span>
                                         <span class="main_r">
-                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                               <input type="text" value="2014-05-06"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">签注有效期：</span>
                                         <span class="main_r">
-                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                               <input type="text" value="2014-05-06"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
@@ -351,13 +351,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                    <li class="clearfix mli">
                                         <span class="main_l">护照签发日期：</span>
                                         <span class="main_r">
-                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                               <input type="text" value="2014-05-06"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">护照有效日期：</span>
                                         <span class="main_r">
-                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                               <input type="text" value="2014-05-06"/>
                                         </span>
                                    </li>
                               </ul>

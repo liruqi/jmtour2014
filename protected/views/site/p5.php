@@ -263,27 +263,28 @@
                <ul class="ma01i02 clearfix">
                     <li class="clearfix mli">
                          <span class="main_l">出发口岸：</span>
-                         <span class="main_r main_rr"><span class="main_rin">此字段由客户在后台中自己添加</span></span>
+                         <span class="main_r main_rr"><span class="main_rin">等待公司安排</span></span>
                     </li>
                     <li class="clearfix mli">
                          <span class="main_l">往返机票：</span>
-                         <span class="main_r main_rr"><span class="main_rin">此字段由客户在后台中自己添加</span></span>
+                         <span class="main_r main_rr"><span class="main_rin">等待公司安排</span></span>
                     </li>
                     <li class="clearfix mli">
                          <span class="main_l">入住酒店：</span>
-                         <span class="main_r main_rr"><span class="main_rin">此字段由客户在后台中自己添加</span></span>
+                         <span class="main_r main_rr"><span class="main_rin">
+                            <?php if($user->level == "大团") echo ($user->wave=="批次1") ? "台北喜来登大酒店":"台北君悦大酒店"; ?></span></span>
                     </li>
                     <li class="clearfix mli">
                          <span class="main_l">同住人：</span>
-                         <span class="main_r main_rr"><span class="main_rin">此字段由客户在后台中自己添加</span></span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->roommate; ?></span></span>
                     </li>
                     <li class="clearfix mli">
                          <span class="main_l">出发日期：</span>
-                         <span class="main_r main_rr"><span class="main_rin">此字段由客户在后台中自己添加</span></span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo ($user->wave=="批次1")?"12月10日":"12月12日"; ?></span></span>
                     </li>
                     <li class="clearfix mli">
                          <span class="main_l">返程日期：</span>
-                         <span class="main_r main_rr"><span class="main_rin">此字段由客户在后台中自己添加</span></span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo ($user->wave=="批次1")?"12月14日":"12月16日"; ?></span></span>
                     </li>
                     <li class="clearfix mli">
                          <span class="main_l">自选线路：</span>
