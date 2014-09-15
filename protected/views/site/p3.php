@@ -35,7 +35,7 @@
       
 	<form id="login-form" action="<?php echo $_SERVER["REQUEST_URI"];?>" method="post">
       		<div class="Elements04"><label class="El04_01"><input name="LoginForm[accept]" type="checkbox" checked="checked" class="El04_02"/><span class="El04_03 red">本人代表上述参加人对本活动的所有内容予以认可并愿意承担相应的法律责任</span></label></div>
-		<p class="Elements05"><a href="5资料填写.html"><input type="submit" class="anniu" value="报名参加"/></a></p>
+		<p class="Elements05"><input type="submit" class="anniu" value="报名参加"/></p>
 		</form>
 </div>
 </body>

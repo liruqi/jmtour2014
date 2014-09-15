@@ -7,9 +7,6 @@
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/iepng.js"></script>
 <script type="text/javascript">
-	EvPNG.fix('body,div,ul,li,ol,dl,dt,dd,img,input,span,p,h1,h2,h3,h4,a,textarea');
-</script>
-<script type="text/javascript">
     window.onload = function(){
 
 	  }
@@ -21,7 +18,7 @@
 <div id="page04" class="comWidth m_zhong">
       <h1 class="Main_Title">中脉科技2014员工台湾奖励旅游报名系统</h1>
       <p class="Elements01"><span class="DUIQI El01_01"><img src="images/u3.png" width="77" height="73" /></span><span class="DUIQI">密码修改成功！请继续完成您的报名流程，谢谢！</span></p>
-      <p class="Elements02"><a href="?r=site/p3"><input type="submit" class="anniu" value="继续完成"/></a></p>
+      <p class="Elements02"><a href="?r=site/p3" class="anniu" >继续完成</a></p>
 </div>
 </body>
 </html>

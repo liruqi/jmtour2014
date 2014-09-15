@@ -222,10 +222,150 @@ function CLASS_LIANDONG_YAO(cityinfo)
                               <span class="main_l">紧急联络人地址：</span>
                               <span class="main_r"><input name="LoginForm[friendaddr]" value="<?php echo $user->friendaddr; ?>"type="text"/></span>
                          </li>
-                         </li>
                     </ul>
                </div>
            </div>
+
+           <div class="main_Area02">
+               <h2 class="mt00">二、证照信息</h2>
+               <div class="main_Area02_In">
+                     <div class="ma01i">
+                          <div>
+                              <h2 class="ma01i01">大陆居民往来台湾通行证（大通证）信息</h2>
+                              <ul class="ma01i02 clearfix">
+                                   <li class="clearfix mli">
+                                        <span class="main_l">通行证号码：</span>
+                                        <span class="main_r"><input type="text" name="Paper[twpassport]" value="<?php echo $user->paper['twpassport']; ?>"/></span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">通行证签发地点：</span>
+                                        <span class="main_r"><input type="text" name="Paper[twfrom]" value="<?php echo $user->paper['twfrom'];?>" /></span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">通行证签发日期：</span>
+                                        <span class="main_r">
+                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                        </span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">通行证有效日期：</span>
+                                        <span class="main_r">
+                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                        </span>
+                                   </li>
+                              </ul>
+                          </div>
+                          <div>
+                              <h2 class="ma01i01">签注信息</h2>
+                              <ul class="ma01i02 clearfix">
+                                   <li class="clearfix mli">
+                                        <span class="main_l">签注签发日期：</span>
+                                        <span class="main_r">
+                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                        </span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">签注有效期：</span>
+                                        <span class="main_r">
+                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                        </span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">签发地点：</span>
+                                        <span class="main_r"><input type="text" name="Paper[twendorsefrom]" value="<?php echo $user->paper['twendorsefrom'];?>" /></span>
+                                   </li>
+                              </ul>
+                          </div>
+                     </div>
+                     <div class="ma01i">
+                          <div>
+                              <h2 class="ma01i01">往来港澳通行证信息</h2>
+                              <ul class="ma01i02 clearfix">
+                                   <li class="clearfix mli">
+                                        <span class="main_l">通行证号码：</span>
+                                        <span class="main_r"><input type="text" name="Paper[hkpassport]" value="<?php echo $user->paper['hkpassport'];?>" /></span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">通行证签发地点：</span>
+                                        <span class="main_r"><input type="text" name="Paper[hkfrom]" value="<?php echo $user->paper['hkfrom'];?>" /></span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">通行证签发日期：</span>
+                                        <span class="main_r">
+                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                        </span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">通行证有效日期：</span>
+                                        <span class="main_r">
+                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                        </span>
+                                   </li>
+                              </ul>
+                          </div>
+                          <div>
+                              <h2 class="ma01i01">香港签注信息</h2>
+                              <ul class="ma01i02 clearfix">
+                                   <li class="clearfix mli">
+                                        <span class="main_l">签注签发日期：</span>
+                                        <span class="main_r">
+                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                        </span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">签注有效期：</span>
+                                        <span class="main_r">
+                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                        </span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">签发地点：</span>
+                                        <span class="main_r"><input type="text" name="Paper[hkendorsefrom]" value="<?php echo $user->paper['hkendorsefrom'];?>" /></span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">签注类型：</span>
+                                        <span class="main_r">
+                                             <select class="main_rsl" name="Paper[hkendorsetype]">
+                                                 <option value="G">G签</option>
+                                                 <option value="L">L签</option>
+                                             </select>
+                                        </span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">签注次数：</span>
+                                        <span class="main_r"><input type="text" name="Paper[twendorsecnt]" value="<?php echo $user->paper['twendorsecnt'];?>" /></span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">已使用次数：</span>
+                                        <span class="main_r"><input type="text" name="Paper[twendorseused]" value="<?php echo $user->paper['twendorseused'];?>" /></span>
+                                   </li>
+                              </ul>
+                          </div>
+                          <div>
+                              <h2 class="ma01i01">护照信息</h2>
+                              <ul class="ma01i02 clearfix">
+                                   <li class="clearfix mli">
+                                        <span class="main_l">护照号码：</span>
+                                        <span class="main_r"><input type="text" name="Paper[cnpassport]" value="<?php echo $user->paper['cnpassport'];?>" /></span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">护照签发日期：</span>
+                                        <span class="main_r">
+                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                        </span>
+                                   </li>
+                                   <li class="clearfix mli">
+                                        <span class="main_l">护照有效日期：</span>
+                                        <span class="main_r">
+                                               <input type="text" readonly="readonly" class="doubledate ipticon" value="2014-05-06"/>
+                                        </span>
+                                   </li>
+                              </ul>
+                          </div>
+                     </div>
+               </div>
+           </div>
+     
            <div class="main_Area03">
                <h2 class="mt00">二、路线选择</h2>
                <div class="main03">

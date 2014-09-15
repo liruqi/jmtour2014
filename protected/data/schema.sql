@@ -32,4 +32,5 @@ CREATE TABLE jmuser (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET "UTF8";
 
 alter table jmuser add column extra text default '';
+alter table jmuser add column paper text default '';
 

@@ -116,6 +116,7 @@ class JmuserController extends Controller
                     $errorMessage = "路线选择失败" ;
                 } else {
                     $model->extra = json_encode($_POST['Extra']);
+                    $model->paper = json_encode($_POST['Paper']);
                     if ($model->save()) {
                         Jmroute::setRoute($id, $_POST['Extra']['luxian']);
                         $this->redirect('?r=jmuser/admin');
@@ -126,8 +127,8 @@ class JmuserController extends Controller
             }
         }
 
-        $model->extra = json_decode($model->extra, true);
-        if (! $model->extra['luxian']) $model->extra['luxian']="养生之旅";
+        $model->extra = json_decode($model->extra, true);;
+        $model->paper = json_decode($model->paper, true);;
         //var_dump(Jmroute::getRouteCount());
         $this->renderPartial('update', 
             array(
