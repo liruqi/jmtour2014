@@ -1,0 +1,41 @@
+//top
+function sy(){
+	//top
+	 $("#top").click(
+		  function(){
+			   $("html,body").animate(
+				{
+					"scrollTop": 0
+				}
+				, 500);
+			  }
+	 );
+	 //mm_ys
+	$(".main03_03").mouseenter(
+	    function(){
+				 $(this).css("font-weight","bold").children(".main03_03_In").css("display","block");
+			}
+	);
+	$(".main03_03").mouseleave(
+	    function(){
+				 $(this).css("font-weight","100").children(".main03_03_In").css("display","none");
+			}
+	);
+	//fz_02_close
+	 $("#fz_02_close").click(
+		  function(){
+			   $("#fz").css("display","none");
+			  }
+	  );
+	 $("#fz_02_turn").click(
+		  function(){
+			   $("#fz").css("display","block");
+			  }
+	  );
+	//page15_close
+	 $("#page15_close").click(
+		  function(){
+			   $("#fz").css("display","block");
+			  }
+	  );
+	}
