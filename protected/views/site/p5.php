@@ -7,11 +7,26 @@
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/base.js"></script>
 <script type="text/javascript" src="js/xg.js"></script>
+<script type="text/javascript" src="js/placeholder.js"></script>
 <script type="text/javascript">
-window.onload = function(){
+$(document).ready(function(){
+    if($.browser.msie) { 
+        $(":input[placeholder]").each(function(){
+            $(this).placeholder();
+        });
+    }
+
     yy();
     xy();
-}
+});
+    function clear1()
+    {
+        if(confirm("确定要提交数据么？"))
+        {
+            window.location.href='p6.html';
+        }
+    }
+
 </script>
 </head>
 <body>
@@ -143,121 +158,14 @@ window.onload = function(){
                     </ul>
                </div>
            </div>
+
            <div class="main_Area02">
                <h2 class="mt00">二、证照信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
-               <!--<label class="mt01 mt_xx"><input type="radio" name="zhuzhi" class="mt_01_01 DUIQI" checked="checked"/><span class="DUIQI">大陆居民往来台湾通行证信息</span></label>
-               <label class="mt02 mt_xx"><input type="radio" name="zhuzhi" class="mt_02_01 DUIQI"/><span class="DUIQI">往来港澳通行证信息+护照信息</span></label>-->               
                <div class="main_Area02_In">
-                     <div class="ma01i">
-                          <div>
-                              <h2 class="ma01i01">大陆居民往来台湾通行证（大通证）信息</h2>
-                              <ul class="ma01i02 clearfix">
-                                   <li class="clearfix mli">
-                                        <span class="main_l">通行证号码：</span>
-                                        <span class="main_r"><span class="main_rin">1654546545</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">通行证签发地点：</span>
-                                        <span class="main_r main_rr"><span class="main_rin">北京</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">通行证签发日期：</span>
-                                        <span class="main_r"><span class="main_rin">2014-05-06</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">通行证有效日期：</span>
-                                        <span class="main_r"><span class="main_rin">2014-06-29</span></span>
-                                   </li>
-                              </ul>
-                          </div>
-                          <div>
-                              <h2 class="ma01i01">签注信息</h2>
-                              <ul class="ma01i02 clearfix">
-                                   <li class="clearfix mli">
-                                        <span class="main_l">签注签发日期：</span>
-                                        <span class="main_r"><span class="main_rin">2014-05-06</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">签注有效期：</span>
-                                        <span class="main_r"><span class="main_rin">2014-06-29</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">签发地点：</span>
-                                        <span class="main_r main_rr"><span class="main_rin">北京</span></span>
-                                   </li>
-                              </ul>
-                          </div>
-                     </div>
-                     <div class="ma01i">
-                          <div>
-                              <h2 class="ma01i01">往来港澳通行证信息</h2>
-                              <ul class="ma01i02 clearfix">
-                                   <li class="clearfix mli">
-                                        <span class="main_l">通行证号码：</span>
-                                        <span class="main_r"><span class="main_rin">1654546545</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">通行证签发地点：</span>
-                                        <span class="main_r main_rr"><span class="main_rin">北京</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">通行证签发日期：</span>
-                                        <span class="main_r"><span class="main_rin">2014-05-06</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">通行证有效日期：</span>
-                                        <span class="main_r"><span class="main_rin">2014-06-29</span></span>
-                                   </li>
-                              </ul>
-                          </div>
-                          <div>
-                              <h2 class="ma01i01">香港签注信息</h2>
-                              <ul class="ma01i02 clearfix">
-                                   <li class="clearfix mli">
-                                        <span class="main_l">签注签发日期：</span>
-                                        <span class="main_r"><span class="main_rin">2014-05-06</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">签注有效期：</span>
-                                        <span class="main_r"><span class="main_rin">2014-06-29</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">签发地点：</span>
-                                        <span class="main_r main_rr"><span class="main_rin">北京</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">签注类型：</span>
-                                        <span class="main_r"><span class="main_rin">L签</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">签注次数：</span>
-                                        <span class="main_r"><span class="main_rin">2</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">已使用次数：</span>
-                                        <span class="main_r"><span class="main_rin">1</span></span>
-                                   </li>
-                              </ul>
-                          </div>
-                          <div>
-                              <h2 class="ma01i01">护照信息</h2>
-                              <ul class="ma01i02 clearfix">
-                                   <li class="clearfix mli">
-                                        <span class="main_l">护照号码：</span>
-                                        <span class="main_r"><span class="main_rin">1654546545</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">护照签发日期：</span>
-                                        <span class="main_r"><span class="main_rin">2014-05-06</span></span>
-                                   </li>
-                                   <li class="clearfix mli">
-                                        <span class="main_l">护照有效日期：</span>
-                                        <span class="main_r"><span class="main_rin">2014-06-29</span></span>
-                                   </li>
-                              </ul>
-                          </div>
-                     </div>
-               </div>
+
+                              <h2 class="ma01i01">等待您的提交</h2>
+                </div>
+    
            </div>
            <div class="main_Area03">
                <h2 class="mt00">三、行程信息</h2>
@@ -291,23 +199,20 @@ window.onload = function(){
                          <span class="main_l">自选线路：</span>
                          <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['luxian']; ?></span></span>
                     </li>
+                    <li class="clearfix">
+                        <p>为了满足各位家人的游览需求，行程中特设一天可供您选择的行程。请您根据喜好自行选择，数量有限，先到先得哦！</p>
+                    </li>
                </ul>
            </div>
       </div>
       </form>
       <p class="Elements03">
           <a href="?r=site/p4" class="anniu" name="back" >返回修改</a>
-          <a href="javascript:void(0);" id="fz_02_turn"><input type="submit" class="anniu" name="ok" value="确认提交"/></a>
+          <a class="anniu" href="javascript:void(0)" name="ok" onClick="javascript:clear1()">确认提交</a>
           <a class="anniu" href="javascript:void(0)" onClick="javascript:window.print()">打印</a>
       </p>
 </div>
 <div id="top"></div>
-<div id="fz">
-      <p class="fz_01"><span class="DUIQI fz_01_t"></span><span class="DUIQI">已确认核实个人报名信息</span></p>
-      <p class="fz_02">
-          <a href="p6.html"><input type="submit" class="anniu" value="是"/></a>
-          <a href="javascript:void(0);" id="fz_02_close"><input type="submit" class="anniu" value="否"/></a>
-      </p>
-</div>
+
 </body>
 </html>

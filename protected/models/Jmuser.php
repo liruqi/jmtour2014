@@ -87,6 +87,30 @@ class Jmuser extends CActiveRecord
 		);
 	}
 
+    public static function paperFields() {
+        return array(
+            'twpassport',
+            'twfrom',
+            'twstarttime',
+            'twendtime',
+            'twendorsestart',
+            'twendorseend',
+            'twendorsefrom',
+            'hkpassport',
+            'hkfrom',
+            'hkstarttime',
+            'hkendtime',
+            'hkendorsestart',
+            'hkendorseend',
+            'hkendorsefrom',
+            'hkendorsecnt',
+            'hkendorsetype',
+            'cnpassport',
+            'cnstarttime',
+            'cnendtime'
+        );
+    }
+
 	public static function fields() {
 		return array(
 				'id',

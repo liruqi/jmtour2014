@@ -69,14 +69,19 @@ class SiteController extends Controller
             $id = strtoupper(Yii::app()->getUser()->getName());
             $model=Jmuser::model()->findByPk($id);
             if ($form['password']===$form['passwd']) {
-                $model->password = $form['password'];
-                if ($model->save()) {
-			    $this->redirect('?r=site/p2');
-                return;
+                if (empty($form['password'])) {
+                    $errorCode = 1;
+                } else {
+                    $model->password = $form['password'];
+                    if ($model->save()) {
+                        $this->redirect('?r=site/p2');
+                        return;
+                    }
+                    $errorCode = 3;
                 }
+            } else {
                 $errorCode = 2;
             }
-            $errorCode = 1;
 		}
 		$this->renderPartial('p1', array('error' => $errorCode));
 	}
@@ -149,7 +154,7 @@ class SiteController extends Controller
         }
 
         $model->extra = json_decode($model->extra, true);
-        if (! $model->extra['luxian']) $model->extra['luxian']="养生之旅";
+        if (! $model->extra['luxian']) $model->extra['luxian']="台中线";
         //var_dump(Jmroute::getRouteCount());
         $this->renderPartial('p4', 
             array(
@@ -264,7 +269,7 @@ class SiteController extends Controller
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->homeUrl);
+		$this->redirect('?r=site/login');
 	}
 
     private function session($id) {

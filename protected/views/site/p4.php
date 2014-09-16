@@ -222,7 +222,6 @@ function CLASS_LIANDONG_YAO(cityinfo)
                               <span class="main_l">紧急联络人地址：</span>
                               <span class="main_r"><input name="LoginForm[friendaddr]" value="<?php echo $user->friendaddr; ?>"type="text"/></span>
                          </li>
-                         </li>
                     </ul>
                </div>
            </div>
@@ -231,16 +230,16 @@ function CLASS_LIANDONG_YAO(cityinfo)
                <div class="main03">
                     <ul class="clearfix">
                          <li class="clearfix">
-                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="养生之旅" class="DUIQI" <?php if($user->extra['luxian']=="养生之旅") echo 'checked="checked"'; ?> />
-                              <span class="DUIQI">养生之旅</span></label>
+                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="台中线" class="DUIQI" <?php if($user->extra['luxian']=="台中线") echo 'checked="checked"'; ?> />
+                              <span class="DUIQI">台中线</span></label>
                               <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R1]; ?></span></p>
-                              <span class="main03_03">线路介绍<span class="main03_03_In"><img src="images/_u160.png"/></span></span>
+                              <span class="main03_03">日月潭~埔里小镇<span class="main03_03_In"><img src="images/_u160.png"/></span></span>
                          </li>
                          <li class="clearfix">
-                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="文化之旅" class="DUIQI" <?php if($user->extra['luxian']=="文化之旅") echo 'checked="checked"'; ?>/>
-                            <span class="DUIQI">文化之旅</span></label>
+                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="花莲线" class="DUIQI" <?php if($user->extra['luxian']=="花莲线") echo 'checked="checked"'; ?>/>
+                            <span class="DUIQI">花莲线</span></label>
                               <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R2]; ?></span></p>
-                              <span class="main03_03">线路介绍<span class="main03_03_In main03_03_In2"><img src="images/_u162.png"/></span></span>
+                              <span class="main03_03">太鲁阁公园~七星潭<span class="main03_03_In main03_03_In2"><img src="images/_u162.png"/></span></span>
                          </li>
                     </ul>
                </div>

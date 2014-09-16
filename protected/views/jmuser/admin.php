@@ -1,10 +1,6 @@
-<div id="page15" class="comWidth m_zhong">
-    <a href="?r=site/logout"> 
-        <input type="submit" id="page15_close" class="Drop_Out anniu" name="<?php echo Yii::app()->user->name; ?>" value="退出"/>
-    </a>
-    <h1 class="Main_Title">中脉科技2014员工台湾奖励旅游报名系统</h1>
+
       <div class="nav clearfix">
-            <input type="submit" class="Export_Data" value="导出数据"/>
+            <a  class="Export_Data" href="?r=jmuser/dump">导出数据</a>
             <div class="Search_Data clearfix">
                 <input class="S_00" type="text"/>
                 <input class="S_01 anniu" type="submit" value="搜索"/>
@@ -50,4 +46,3 @@ for($row=0;$row<$n;++$row) {
 
 ?>
         </div>
-</div>

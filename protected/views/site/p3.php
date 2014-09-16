@@ -6,24 +6,22 @@
 <link type="text/css" rel="stylesheet" href="css/style.css"/>
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script language="javascript"> 
-   //表单验证 
-   function check(){               
-      var ids = document.getElementsByName("LoginForm[accept]");               
-      var flag = false ;               
-      for(var i=0;i<ids.length;i++){ 
-         if(ids[i].checked){ 
+//表单验证 
+function check(){               
+    var ids = document.getElementsByName("LoginForm[accept]");               
+    var flag = false ;               
+    for(var i=0;i<ids.length;i++){ 
+        if(ids[i].checked){ 
             flag = true ; 
             break ; 
-         } 
-      } 
-      if(!flag){ 
-         alert("您尚未同意本条款！"); 
-         return false ; 
-      }else{
-          window.location.href='5资料填写.html';
-         return false ; 
-         }
-   } 
+        } 
+    } 
+    if(!flag){ 
+        alert("您尚未同意本条款！"); 
+        return false ; 
+    }
+    return true;
+} 
 </script> 
 
 </head>
@@ -45,8 +43,8 @@
       </p>
       <p class="Elements03">中脉科技<br />2014年8月29日</p>
       
-	<form id="login-form" action="<?php echo $_SERVER["REQUEST_URI"];?>" method="post">
-      		<div class="Elements04"><label class="El04_01"><input name="LoginForm[accept]" type="checkbox" checked="checked" class="El04_02"/><span class="El04_03 red">本人代表上述参加人对本活动的所有内容予以认可并愿意承担相应的法律责任</span></label></div>
+	<form id="login-form" onsubmit="return check();" action="<?php echo $_SERVER["REQUEST_URI"];?>" method="post">
+      		<div class="Elements04"><label class="El04_01"><input name="LoginForm[accept]" type="checkbox" class="El04_02"/><span class="El04_03 red">本人代表上述参加人对本活动的所有内容予以认可并愿意承担相应的法律责任</span></label></div>
 		<p class="Elements05"><input type="submit" class="anniu" value="报名参加"/></p>
 		</form>
 </div>

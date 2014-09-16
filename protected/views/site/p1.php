@@ -15,12 +15,16 @@
               <div class="u_01 u_00 clearfix">
                     <span class="u_00l">请重置登录密码:</span>
                     <div class="u_00r"><input name="LoginForm[password]" type="password" class="Input_box"/></div>
+<?php if ($error == 1) { ?>
                     <span class="u_tishi red">请输入新密码</span>
+<?php } ?>
               </div>
               <div class="u_02 u_00 clearfix">
                     <span class="u_00l">请再次输入密码:</span>
                     <div class="u_00r"><input name="LoginForm[passwd]" type="password" class="Input_box"/></div>
+<?php if ($error == 2) { ?>
                     <span class="u_tishi red">两次输入的密码不一致</span>
+<?php } ?>
               </div>
       </div>
       <p class="Elements02"><a href="3密码修改成功.html"><input type="submit" class="anniu" value="提交修改"/></a></p>

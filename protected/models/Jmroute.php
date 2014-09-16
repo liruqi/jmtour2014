@@ -2,8 +2,8 @@
 
 class Jmroute
 {
-    public static $R1 = "养生之旅";
-    public static $R2 = "文化之旅";
+    public static $R1 = "台中线";
+    public static $R2 = "花莲线";
     public static function path() { 
         return dirname(dirname(__FILE__)) . "/data/route.json";
     }

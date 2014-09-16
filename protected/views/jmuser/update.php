@@ -244,13 +244,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                    <li class="clearfix mli">
                                         <span class="main_l">通行证签发日期：</span>
                                         <span class="main_r">
-                                               <input type="text" value="2014-05-06"/>
+                                               <input type="text" name="Paper[twstarttime]" value="<?php echo $user->paper['twstarttime'];?>"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">通行证有效日期：</span>
                                         <span class="main_r">
-                                               <input type="text" value="2014-05-06"/>
+                                               <input type="text" name="Paper[twendtime]" value="<?php echo $user->paper['twendtime'];?>"/>
                                         </span>
                                    </li>
                               </ul>
@@ -261,13 +261,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                    <li class="clearfix mli">
                                         <span class="main_l">签注签发日期：</span>
                                         <span class="main_r">
-                                               <input type="text" value="2014-05-06"/>
+                                        <input type="text" name="Paper[twendorsestart]" value="<?php echo $user->paper['twendorsestart'];?>"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">签注有效期：</span>
                                         <span class="main_r">
-                                               <input type="text" value="2014-05-06"/>
+                                        <input type="text" name="Paper[twendorseend]" value="<?php echo $user->paper['twendorseend'];?>"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
@@ -292,13 +292,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                    <li class="clearfix mli">
                                         <span class="main_l">通行证签发日期：</span>
                                         <span class="main_r">
-                                               <input type="text" value="2014-05-06"/>
+                                        <input type="text" name="Paper[hkstarttime]" value="<?php echo $user->paper['hkstarttime'];?>"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">通行证有效日期：</span>
                                         <span class="main_r">
-                                               <input type="text" value="2014-05-06"/>
+                                        <input type="text" name="Paper[hkendtime]" value="<?php echo $user->paper['hkendtime'];?>"/>
                                         </span>
                                    </li>
                               </ul>
@@ -309,13 +309,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                    <li class="clearfix mli">
                                         <span class="main_l">签注签发日期：</span>
                                         <span class="main_r">
-                                               <input type="text" value="2014-05-06"/>
+                                        <input type="text" name="Paper[hkendorsestart]" value="<?php echo $user->paper['hkendorsestart'];?>"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">签注有效期：</span>
                                         <span class="main_r">
-                                               <input type="text" value="2014-05-06"/>
+                                        <input type="text" name="Paper[hkendorseend]" value="<?php echo $user->paper['hkendorseend'];?>"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
@@ -326,18 +326,18 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                         <span class="main_l">签注类型：</span>
                                         <span class="main_r">
                                              <select class="main_rsl" name="Paper[hkendorsetype]">
-                                                 <option value="G">G签</option>
-                                                 <option value="L">L签</option>
+                                                <option value="G" <?php if($user->paper['hkendorsetype']=='G') {echo "selected=selected";} ?>>G签</option>
+                                                <option value="L" <?php if($user->paper['hkendorsetype']=='L') {echo "selected=selected";} ?>>L签</option>
                                              </select>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">签注次数：</span>
-                                        <span class="main_r"><input type="text" name="Paper[twendorsecnt]" value="<?php echo $user->paper['twendorsecnt'];?>" /></span>
+                                        <span class="main_r"><input type="text" name="Paper[hkendorsecnt]" value="<?php echo $user->paper['hkendorsecnt'];?>" /></span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">已使用次数：</span>
-                                        <span class="main_r"><input type="text" name="Paper[twendorseused]" value="<?php echo $user->paper['twendorseused'];?>" /></span>
+                                        <span class="main_r"><input type="text" name="Paper[hkendorseused]" value="<?php echo $user->paper['hkendorseused'];?>" /></span>
                                    </li>
                               </ul>
                           </div>
@@ -351,13 +351,13 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                    <li class="clearfix mli">
                                         <span class="main_l">护照签发日期：</span>
                                         <span class="main_r">
-                                               <input type="text" value="2014-05-06"/>
+                                        <input type="text" name="Paper[cnstarttime]" value="<?php echo $user->paper['cnstarttime'];?>"/>
                                         </span>
                                    </li>
                                    <li class="clearfix mli">
                                         <span class="main_l">护照有效日期：</span>
                                         <span class="main_r">
-                                               <input type="text" value="2014-05-06"/>
+                                        <input type="text" name="Paper[cnendtime]" value="<?php echo $user->paper['cnendtime'];?>"/>
                                         </span>
                                    </li>
                               </ul>
@@ -371,16 +371,16 @@ function CLASS_LIANDONG_YAO(cityinfo)
                <div class="main03">
                     <ul class="clearfix">
                          <li class="clearfix">
-                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="养生之旅" class="DUIQI" <?php if($user->extra['luxian']=="养生之旅") echo 'checked="checked"'; ?> />
-                              <span class="DUIQI">养生之旅</span></label>
+                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="台中线" class="DUIQI" <?php if($user->extra['luxian']=="台中线") echo 'checked="checked"'; ?> />
+                              <span class="DUIQI">台中线</span></label>
                               <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R1]; ?></span></p>
-                              <span class="main03_03">线路介绍<span class="main03_03_In"><img src="images/_u160.png"/></span></span>
+                              <span class="main03_03">日月潭~埔里小镇<span class="main03_03_In"><img src="images/_u160.png"/></span></span>
                          </li>
                          <li class="clearfix">
-                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="文化之旅" class="DUIQI" <?php if($user->extra['luxian']=="文化之旅") echo 'checked="checked"'; ?>/>
-                            <span class="DUIQI">文化之旅</span></label>
+                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="花莲线" class="DUIQI" <?php if($user->extra['luxian']=="花莲线") echo 'checked="checked"'; ?>/>
+                            <span class="DUIQI">花莲线</span></label>
                               <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R2]; ?></span></p>
-                              <span class="main03_03">线路介绍<span class="main03_03_In main03_03_In2"><img src="images/_u162.png"/></span></span>
+                              <span class="main03_03">太鲁阁公园~七星潭<span class="main03_03_In main03_03_In2"><img src="images/_u162.png"/></span></span>
                          </li>
                     </ul>
                </div>

@@ -28,7 +28,7 @@ class JmuserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','dump'),
 				'users'=>array('admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -44,6 +44,51 @@ class JmuserController extends Controller
 			),
 		);
 	}
+
+    public function actionDump() {
+        Yii::import('ext.yiiexcel.YiiExcel', true);
+        Yii::registerAutoloader(array('YiiExcel', 'autoload'), true);
+    
+        $root =  dirname(dirname(dirname(__FILE__)));
+        $ts = (int)(time() / 100);
+        $filePath = $root . "/download/{$ts}.xlsx";
+        if (file_exists($filePath)) {
+            header ("Location: /download/{$ts}.xlsx");
+            echo ("Cache: hit");
+            exit();
+        }
+
+        $model=new Jmuser('search');
+        $model->unsetAttributes();  // clear any default values
+        $model->attributes=array();
+        $data = $model->search();
+        $data->setPagination (false);
+        $objPHPExcel = new PHPExcel();
+        $row = 1;
+
+        foreach (Jmuser::fields() as $col => $field) {
+            $labels = $model->attributeLabels();
+            $name = isset( $labels[$field] ) ? $labels[$field] : $field;
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col , $row, $name);
+        }
+        //var_dump($cnt, $data->getItemCount(),  $data->getTotalItemCount());
+        $users = $data->getData( array("order" => "sysID"));
+        foreach ($users as $key => $user)
+        {
+            // echo  "{$row}/" . count($users) . " " . $user->oa . "\n";
+            $row += 1;
+            foreach (Jmuser::fields() as $col => $field) {
+                $val = $user->$field;
+                $cell = $objPHPExcel->getActiveSheet()->getCellByColumnAndRow($col, $row);
+                $cell->setValueExplicit($val, PHPExcel_Cell_DataType::TYPE_STRING);
+            }
+        }
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+
+        $objWriter->save($filePath);
+        header ("Location: /download/{$ts}.xlsx");
+
+    }
 
 	/**
 	 * Displays a particular model.
@@ -99,24 +144,32 @@ class JmuserController extends Controller
         $routeCount = Jmroute::getRouteCount();
         if (isset($_POST['LoginForm'])) {
             $form=$_POST['LoginForm'];
+            $translate = $model->attributeLabels();
             foreach ($form as $k => $v) {
                 $model->$k = $v;
                 if (empty($v)) {
-                    $errorMessage = "缺少字段: " . $k;
+                    $errorMessage = "所有信息均为必填，缺少信息: " . $fieldName;
                 }
             }
+
             if (! isset($_POST['Extra']['luxian'])) {
-                $errorMessage = "缺少字段: 路线选择" ;
+                $errorMessage = "所有信息均为必填，缺少信息: 路线选择" ;
             }
 
+            foreach (Jmuser::paperFields() as $idx => $f) {
+                if (! isset($_POST['Paper'][$f])) {
+                    $errorMessage = "所有信息均为必填，缺少信息: {$f}" ;
+                }
+            }
+
+            $model->extra = json_encode($_POST['Extra']);
+            $model->paper = json_encode($_POST['Paper']);
             if ( empty($errorMessage) ) {
                 $luxian=$_POST['Extra']['luxian'];
                 
                 if (($routeCount[$luxian]) <= 0) {
                     $errorMessage = "路线选择失败" ;
                 } else {
-                    $model->extra = json_encode($_POST['Extra']);
-                    $model->paper = json_encode($_POST['Paper']);
                     if ($model->save()) {
                         Jmroute::setRoute($id, $_POST['Extra']['luxian']);
                         $this->redirect('?r=jmuser/admin');

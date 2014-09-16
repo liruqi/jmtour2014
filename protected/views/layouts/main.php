@@ -12,8 +12,15 @@
 <body>
 <div class="zmlogo"></div>
 <div class="zmjt"></div>
-<?php echo $content; ?>
 
+<div id="page15" class="comWidth m_zhong">
+    <a href="?r=site/logout"> 
+        <input type="submit" id="page15_close" class="Drop_Out anniu" name="<?php echo Yii::app()->user->name; ?>" value="退出"/>
+    </a>
+    <h1 class="Main_Title">中脉科技2014员工台湾奖励旅游报名系统</h1>
+
+    <?php echo $content; ?>
+</div>
 
 </body>
 </html>

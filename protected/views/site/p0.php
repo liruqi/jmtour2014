@@ -37,8 +37,8 @@
              } ?>
                         </span>
                   </div>
-                  <p class="red Elements01">注：员工编号唯一，所有员工初始密码已经发送到您的手机上，登录后可以自行修改</p>
-                  <p class="Elements02"><a href="2密码修改.html"><input type="submit" class="anniu" value="登录"/></a></p>
+                  <p class="red Elements01">注：您的初始密码是您的身份证后六位数字</p>
+                  <p class="Elements02"><input type="submit" class="anniu" value="登录"/></p>
 		</form>
             </div>
       </div>
