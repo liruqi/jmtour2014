@@ -1,10 +1,12 @@
 
       <div class="nav clearfix">
             <a  class="Export_Data" href="?r=jmuser/dump">导出数据</a>
+	    	<form action="<?php echo $_SERVER["REQUEST_URI"];?>" method="post">
             <div class="Search_Data clearfix">
-                <input class="S_00" type="text"/>
+                <input class="S_00" type="text" name="Jmuser" />
                 <input class="S_01 anniu" type="submit" value="搜索"/>
             </div>
+            </form>
       </div>
 
 
@@ -21,13 +23,17 @@
     <div class="tbody clearfix">
 
 <?php
-$dataProvider=$model->search();
 $data=$dataProvider->getData();
 $n=count($data);
 
 for($row=0;$row<$n;++$row) {
     $user = $data[$row];
-    $status = $user->password && $user->extra ? "已提交" : "未提交";
+    $status = "";
+    if ($user->extra) {
+        $status = $user->paper ? "已提交" : "个人资料已提交，证照未提交";
+    } else {
+        $status = $user->paper ? "证照已提交，个人资料未提交" : "未提交";
+    }
     $extra = array();
     $method = "";
     if (  $user->extra) {

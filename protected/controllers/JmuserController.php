@@ -137,28 +137,32 @@ class JmuserController extends Controller
 		// $this->performAjaxValidation($model);
 
         if (! $model) {
-            $this->redirect('?r=jmuser/admin');    
+            $this->redirect('?r=jmuser');    
             return;
         }
         $errorMessage = "";
-        $routeCount = Jmroute::getRouteCount();
+        $routeCount = Jmroute::getRouteCount($model->wave);
         if (isset($_POST['LoginForm'])) {
             $form=$_POST['LoginForm'];
             $translate = $model->attributeLabels();
             foreach ($form as $k => $v) {
                 $model->$k = $v;
                 if (empty($v)) {
+                    $fieldName = isset($translate[$k]) ? $translate[$k]:$k;
                     $errorMessage = "所有信息均为必填，缺少信息: " . $fieldName;
                 }
             }
 
-            if (! isset($_POST['Extra']['luxian'])) {
-                $errorMessage = "所有信息均为必填，缺少信息: 路线选择" ;
+            foreach (Jmuser::extraFields() as $idx => $f) {
+                if (empty($_POST['Extra'][$f])) {
+                    $fieldName = isset($translate[$f]) ? $translate[$f]:$f;
+                    $errorMessage = "所有信息均为必填，缺少信息: {$fieldName}" ;
+                }
             }
-
             foreach (Jmuser::paperFields() as $idx => $f) {
-                if (! isset($_POST['Paper'][$f])) {
-                    $errorMessage = "所有信息均为必填，缺少信息: {$f}" ;
+                if (empty($_POST['Paper'][$f])) {
+                    $fieldName = isset($translate[$f]) ? $translate[$f]:$f;
+                    $errorMessage = "所有信息均为必填，缺少信息: {$fieldName}" ;
                 }
             }
 
@@ -171,8 +175,8 @@ class JmuserController extends Controller
                     $errorMessage = "路线选择失败" ;
                 } else {
                     if ($model->save()) {
-                        Jmroute::setRoute($id, $_POST['Extra']['luxian']);
-                        $this->redirect('?r=jmuser/admin');
+                        Jmroute::setRoute($model->wave, $id, $_POST['Extra']['luxian']);
+                        $this->redirect('?r=jmuser');
                         return;
                     } 
                     $errorMessage = "保存失败 :(";
@@ -182,7 +186,6 @@ class JmuserController extends Controller
 
         $model->extra = json_decode($model->extra, true);;
         $model->paper = json_decode($model->paper, true);;
-        //var_dump(Jmroute::getRouteCount());
         $this->renderPartial('update', 
             array(
                 'user'=>$model, 'error' => $errorMessage, 'route' => $routeCount 
@@ -201,7 +204,7 @@ class JmuserController extends Controller
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
 	}
 
 	/**
@@ -209,14 +212,24 @@ class JmuserController extends Controller
 	 */
 	public function actionIndex()
 	{
-        $dataProvider=new CActiveDataProvider('Jmuser',
-            array(
-                'pagination' => array (
-                    'pageSize' => 500
-                ),
-            )
-        );
-		$this->render('index',array(
+        $model=new Jmuser('search');
+        $model->unsetAttributes();  // clear any default values
+
+        if(isset($_POST['Jmuser'])) {
+            if (is_array($_POST['Jmuser'])) {
+                $model->attributes=$_POST['Jmuser'];
+                $dataProvider=$model->search();
+            } else {
+                $model->oa = $_POST['Jmuser'];
+                $model->name = $_POST['Jmuser'];
+                $model->idcard = $_POST['Jmuser'];
+                $model->phone = $_POST['Jmuser'];
+                $dataProvider=$model->orSearch();
+            }
+        } else {
+            $dataProvider = $model->search();
+        }
+		$this->render('admin',array(
 			'dataProvider'=>$dataProvider,
 		));
 	}
@@ -228,8 +241,8 @@ class JmuserController extends Controller
 	{
 		$model=new Jmuser('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Jmuser']))
-			$model->attributes=$_GET['Jmuser'];
+		if(isset($_POST['Jmuser']))
+			$model->attributes=$_POST['Jmuser'];
 
 		$this->render('admin',array(
 			'model'=>$model,

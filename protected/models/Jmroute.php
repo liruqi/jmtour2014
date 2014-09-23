@@ -4,13 +4,14 @@ class Jmroute
 {
     public static $R1 = "台中线";
     public static $R2 = "花莲线";
-    public static function path() { 
-        return dirname(dirname(__FILE__)) . "/data/route.json";
+    public static function path($wave) { 
+        $w = intval (strrev($wave));
+        return dirname(dirname(__FILE__)) . "/data/route{$w}.json";
     }
 
-	public static function setRoute($oa, $r)
+	public static function setRoute($wave, $oa, $r)
     {
-        $rawdata = file_get_contents(self::path());
+        $rawdata = file_get_contents(self::path($wave));
         $routemap = array(self::$R1=>array(), self::$R2=>array());
         if ($rawdata) {
             $routemap = json_decode($rawdata, TRUE);
@@ -21,20 +22,20 @@ class Jmroute
             else 
                 unset ($routemap[$k][$oa]);
         }
-        return file_put_contents(self::path(), json_encode($routemap));
+        return file_put_contents(self::path($wave), json_encode($routemap));
     }
 
-    public static function getRouteCount()
+    public static function getRouteCount($wave)
     {
-        $total = array(self::$R1=>300, self::$R2=>100);
-        $rawdata = file_get_contents(self::path());
+        $total = array("批次1"=>117, "批次2"=>86);
+        $rawdata = file_get_contents(self::path($wave));
         $routemap = array(self::$R1=>array(), self::$R2=>array());
         if ($rawdata) {
             $routemap = json_decode($rawdata, TRUE);
         }
         return array(
-            self::$R1 => $total[self::$R1] - count( $routemap[self::$R1]),
-            self::$R2 => $total[self::$R2] - count( $routemap[self::$R2])
+            self::$R1 => $total[$wave] - count( $routemap[self::$R1]),
+            self::$R2 => $total[$wave] - count( $routemap[self::$R2])
         );
 	}
 }

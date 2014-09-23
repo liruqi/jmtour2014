@@ -111,6 +111,21 @@ class Jmuser extends CActiveRecord
         );
     }
 
+    public static function extraFields() {
+        return array(
+            'homecity',
+            'homearea',
+            'homeaddr',
+            'hukoucity',
+            'hukouarea',
+            'hukouaddr',
+            'luxian',
+            'education',
+            'school',
+            'major',
+            'graduate',
+        );
+    }
 	public static function fields() {
 		return array(
 				'id',
@@ -183,7 +198,19 @@ class Jmuser extends CActiveRecord
 			'idcard' => 'Idcard',
 			'endorse' => 'Endorse',
 			'city' => 'City',
-			'huji' => 'Huji',
+            'huji' => 'Huji',
+
+            'luxian' => '路线选择',
+            'homecity' => '家庭住址',
+            'homearea' => '家庭住址',
+            'homeaddr' => '家庭住址',
+            'hukoucity' => '户籍所在地',
+            'hukouarea' => '户籍所在地',
+            'hukouaddr' => '户籍所在地',
+            'education' => '最高学历',
+            'school' => '毕业院校',
+            'major' => '专业',
+            'graduate' => '毕业时间',
 		);
 	}
 
@@ -205,9 +232,7 @@ class Jmuser extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
 		$criteria->compare('oa',$this->oa,true);
-		$criteria->compare('password',$this->password,true);
 		$criteria->compare('wave',$this->wave,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('level',$this->level,true);
@@ -216,21 +241,11 @@ class Jmuser extends CActiveRecord
 		$criteria->compare('bq',$this->bq,true);
 		$criteria->compare('depart',$this->depart,true);
 		$criteria->compare('race',$this->race,true);
-		$criteria->compare('nation',$this->nation,true);
-		$criteria->compare('height',$this->height,true);
-		$criteria->compare('weight',$this->weight,true);
 		$criteria->compare('eat',$this->eat,true);
-		$criteria->compare('friendname',$this->friendname,true);
-		$criteria->compare('friendphone',$this->friendphone,true);
-		$criteria->compare('friendaddr',$this->friendaddr,true);
-		$criteria->compare('onboardtime',$this->onboardtime,true);
-		$criteria->compare('hotel',$this->hotel,true);
 		$criteria->compare('room',$this->room,true);
 		$criteria->compare('roommate',$this->roommate,true);
 		$criteria->compare('idcard',$this->idcard,true);
 		$criteria->compare('endorse',$this->endorse,true);
-		$criteria->compare('city',$this->city,true);
-		$criteria->compare('huji',$this->huji,true);
 
 		return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -240,6 +255,23 @@ class Jmuser extends CActiveRecord
 		));
 	}
 
+    public function orSearch() {
+        $criteria=new CDbCriteria();
+        $criteria->compare('oa',$this->oa,true);
+
+        foreach(array('name', 'idcard', 'phone') as $idx => $f) {
+            $c = new CDbCriteria();
+            $c->compare($f, $this->$f);
+            $criteria->mergeWith($c, false);
+        }
+        
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+            'pagination'=>array(
+                'pageSize'=> 500,
+            ),
+		));
+    }
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

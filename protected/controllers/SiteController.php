@@ -121,7 +121,7 @@ class SiteController extends Controller
             return;
         }
         $errorMessage = "";
-        $routeCount = Jmroute::getRouteCount();
+        $routeCount = Jmroute::getRouteCount($model->wave);
         if (isset($_POST['LoginForm'])) {
             $form=$_POST['LoginForm'];
             $translate = $model->attributeLabels();
@@ -132,8 +132,12 @@ class SiteController extends Controller
                     $errorMessage = "所有信息均为必填，缺少信息: " . $fieldName;
                 }
             }
-            if (! isset($_POST['Extra']['luxian'])) {
-                $errorMessage = "所有信息均为必填，缺少信息: 路线选择" ;
+
+            foreach (Jmuser::extraFields() as $idx => $f) {
+                if (empty($_POST['Extra'][$f])) {
+                    $fieldName = isset($translate[$f]) ? $translate[$f]:$f;
+                    $errorMessage = "所有信息均为必填，缺少信息: {$fieldName}" ;
+                }
             }
 
             if ( empty($errorMessage) ) {
@@ -144,7 +148,7 @@ class SiteController extends Controller
                 } else {
                     $model->extra = json_encode($_POST['Extra']);
                     if ($model->save()) {
-                        Jmroute::setRoute($id, $_POST['Extra']['luxian']);
+                        Jmroute::setRoute($model->wave, $id, $_POST['Extra']['luxian']);
                         $this->redirect('?r=site/p5');
                         return;
                     } 
@@ -155,7 +159,6 @@ class SiteController extends Controller
 
         $model->extra = json_decode($model->extra, true);
         if (! $model->extra['luxian']) $model->extra['luxian']="台中线";
-        //var_dump(Jmroute::getRouteCount());
         $this->renderPartial('p4', 
             array(
                 'user'=>$model, 'error' => $errorMessage, 'route' => $routeCount 
@@ -255,7 +258,7 @@ class SiteController extends Controller
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login()) {
-                $this->redirect('?r=jmuser/admin');
+                $this->redirect('?r=jmuser');
                 return;
             }
 		}

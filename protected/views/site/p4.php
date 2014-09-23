@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>填写资料</title>
 <link type="text/css" rel="stylesheet" href="css/style.css"/>
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/city.js"></script>
 <script type="text/javascript" src="js/xg.js"></script>
 <script type="text/javascript">
@@ -16,7 +16,7 @@ if (! empty($error)) echo "alert('{$error}');";
 window.onload = function(){
     cities = city();
     xy();
-    
+    gy();    
     //这是调用代码
     var liandong=new CLASS_LIANDONG_YAO(cities); //设置数据源
     var value = liandong.firstSelectChange("根目录","s1"); //设置第一个选择框
@@ -208,6 +208,23 @@ function CLASS_LIANDONG_YAO(cityinfo)
                                      </select>
                               </span>
                          </li>
+                         <li class="clearfix">
+                              <span class="main_l">最高学历：</span>
+                              <span class="main_r"><input type="text" name="Extra[education]" value="<?php echo $user->extra["education"]; ?>" /></span>
+                         </li>
+                         <li class="clearfix">
+                              <span class="main_l">毕业院校：</span>
+                              <span class="main_r"><input type="text" name="Extra[school]" value="<?php echo $user->extra["school"]; ?>" /></span>
+                         </li>
+                         <li class="clearfix">
+                              <span class="main_l">专业：</span>
+                              <span class="main_r"><input type="text" name="Extra[major]" value="<?php echo $user->extra["major"]; ?>" /></span>
+                         </li>
+                         <li class="clearfix">
+                              <span class="main_l">毕业时间：</span>
+                              <span class="main_r"><input type="text" name="Extra[graduate]" value="<?php echo $user->extra["graduate"]; ?>" placeholder="格式为：2014-06" /></span>
+                         </li>
+
                     </ul>
                     <ul class="main01_04 clearfix">
                          <li class="clearfix">
@@ -233,13 +250,20 @@ function CLASS_LIANDONG_YAO(cityinfo)
                          <label class="main03_01"><input type="radio" name="Extra[luxian]" value="台中线" class="DUIQI" <?php if($user->extra['luxian']=="台中线") echo 'checked="checked"'; ?> />
                               <span class="DUIQI">台中线</span></label>
                               <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R1]; ?></span></p>
-                              <span class="main03_03">日月潭~埔里小镇<span class="main03_03_In"><img src="images/_u160.png"/></span></span>
+                              <span class="main03_03">日月潭~埔里小镇<span class="main03_03_In">
+<img src="images/nima.jpg"/><p class="main03_03_Inzi">日月潭位于中国台湾省南投县鱼池乡水社村，是台湾最大的天然湖，仅次于曾文水库的第二大湖泊，中国最美的湖泊之一，由玉山和阿里山之间的断裂盆地积水而成。</p>
+                        </span></span>
                          </li>
                          <li class="clearfix">
                          <label class="main03_01"><input type="radio" name="Extra[luxian]" value="花莲线" class="DUIQI" <?php if($user->extra['luxian']=="花莲线") echo 'checked="checked"'; ?>/>
                             <span class="DUIQI">花莲线</span></label>
                               <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R2]; ?></span></p>
-                              <span class="main03_03">太鲁阁公园~七星潭<span class="main03_03_In main03_03_In2"><img src="images/_u162.png"/></span></span>
+                              <span class="main03_03">太鲁阁公园~七星潭<span class="main03_03_In main03_03_In2">
+<img src="images/nima.jpg"/> <p class="main03_03_Inzi">七星潭位于花莲县新城乡北埔村，在花莲机场的东侧，七星潭是一个突出于美仑鼻一侧的海湾；七星潭从前是花莲发展。</p>
+ </span></span>
+                         </li>
+                         <li class="clearfix red">
+                              <p>为了满足各位家人的游览需求，行程中特设一天可供您选择的行程。请您根据喜好自行选择，数量有限，先到先得哦！</p>
                          </li>
                     </ul>
                </div>
