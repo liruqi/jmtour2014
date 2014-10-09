@@ -119,13 +119,13 @@ $(document).ready(function(){
                          <li class="clearfix">
                               <span class="main_l">身高：</span>
                               <span class="main_r">
-                              <span class="main_rin"><?php echo $user->height; ?></span>
+                              <span class="main_rin"><?php echo $user->height; ?><em>kg</em></span>
                               </span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">体重：</span>
                               <span class="main_r">
-                              <span class="main_rin"><?php echo $user->weight; ?></span>
+                              <span class="main_rin"><?php echo $user->weight; ?><em>cm</em></span>
                               </span>
                          </li>
                          <li class="clearfix">
@@ -196,7 +196,7 @@ $(document).ready(function(){
                <ul class="ma01i02 clearfix">
                     <li class="clearfix mli">
                          <span class="main_l">出发口岸：</span>
-                         <span class="main_r main_rr"><span class="main_rin red">等待公司安排</span></span>
+                         <span class="main_r main_rr"><span class="main_rin">等待公司安排</span></span>
                     </li>
                     <li class="clearfix mli">
                          <span class="main_l">往返机票：</span>

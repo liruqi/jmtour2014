@@ -122,7 +122,10 @@ class SiteController extends Controller
         }
         $errorMessage = "";
         $routeCount = Jmroute::getRouteCount($model->wave);
+        $extra = json_decode($model->extra, true);
+
         if (isset($_POST['LoginForm'])) {
+            $extra = $_POST['Extra'];
             $form=$_POST['LoginForm'];
             $translate = $model->attributeLabels();
             foreach ($form as $k => $v) {
@@ -134,21 +137,21 @@ class SiteController extends Controller
             }
 
             foreach (Jmuser::extraFields() as $idx => $f) {
-                if (empty($_POST['Extra'][$f])) {
+                if (empty($extra[$f])) {
                     $fieldName = isset($translate[$f]) ? $translate[$f]:$f;
                     $errorMessage = "所有信息均为必填，缺少信息: {$fieldName}" ;
                 }
             }
 
+            $model->extra = json_encode($extra);
             if ( empty($errorMessage) ) {
-                $luxian=$_POST['Extra']['luxian'];
+                $luxian=$extra['luxian'];
                 
                 if (($routeCount[$luxian]) <= 0) {
                     $errorMessage = "路线选择失败" ;
                 } else {
-                    $model->extra = json_encode($_POST['Extra']);
                     if ($model->save()) {
-                        Jmroute::setRoute($model->wave, $id, $_POST['Extra']['luxian']);
+                        Jmroute::setRoute($model->wave, $id, $extra['luxian']);
                         $this->redirect('?r=site/p5');
                         return;
                     } 
@@ -157,8 +160,7 @@ class SiteController extends Controller
             }
         }
 
-        $model->extra = json_decode($model->extra, true);
-        if (! $model->extra['luxian']) $model->extra['luxian']="台中线";
+        $model->extra = $extra;
         $this->renderPartial('p4', 
             array(
                 'user'=>$model, 'error' => $errorMessage, 'route' => $routeCount 

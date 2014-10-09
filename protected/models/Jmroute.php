@@ -2,7 +2,7 @@
 
 class Jmroute
 {
-    public static $R1 = "台中线";
+    public static $R1 = "南投线";
     public static $R2 = "花莲线";
     public static function path($wave) { 
         $w = intval (strrev($wave));

@@ -11,7 +11,6 @@
 <div id="page02" class="comWidth m_zhong">
       <h1 class="Main_Title">中脉科技2014员工台湾奖励旅游报名系统</h1>
   <div class="mian clearfix">
-            <div class="m_l"><img src="images/u0.jpg" width="470"/></div>
             <div class="m_r">
 	    	<form id="login-form" action="<?php echo $_SERVER["REQUEST_URI"];?>" method="post">
 

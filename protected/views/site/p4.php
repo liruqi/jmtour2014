@@ -189,11 +189,17 @@ function CLASS_LIANDONG_YAO(cityinfo)
                          </li>
                          <li class="clearfix">
                               <span class="main_l">身高：</span>
-                              <span class="main_r"><input name="LoginForm[height]" value="<?php echo $user->height; ?>" type="text"/></span>
+                              <span class="main_r">
+                                <input name="LoginForm[height]" value="<?php echo $user->height; ?>" type="text"/>
+                                <i>cm</i>
+                              </span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">体重：</span>
-                              <span class="main_r"><input name="LoginForm[weight]" value="<?php echo $user->weight; ?>" type="text"/></span>
+                              <span class="main_r">
+                                <input name="LoginForm[weight]" value="<?php echo $user->weight; ?>" type="text"/>
+                                <i>kg</i>
+                            </span>
                          </li>
                          <li class="clearfix">
                               <span class="main_l">餐饮忌口：</span>
@@ -247,20 +253,21 @@ function CLASS_LIANDONG_YAO(cityinfo)
                <div class="main03">
                     <ul class="clearfix">
                          <li class="clearfix">
-                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="台中线" class="DUIQI" <?php if($user->extra['luxian']=="台中线") echo 'checked="checked"'; ?> />
-                              <span class="DUIQI">台中线</span></label>
-                              <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R1]; ?></span></p>
-                              <span class="main03_03">日月潭~埔里小镇<span class="main03_03_In">
-<img src="images/nima.jpg"/><p class="main03_03_Inzi">日月潭位于中国台湾省南投县鱼池乡水社村，是台湾最大的天然湖，仅次于曾文水库的第二大湖泊，中国最美的湖泊之一，由玉山和阿里山之间的断裂盆地积水而成。</p>
-                        </span></span>
+                            <input type="radio" name="Extra[luxian]" class="DUIQI main03_00" <?php if($user->extra['luxian']==Jmroute::$R1) echo 'checked="checked"'; ?> value="<?php echo Jmroute::$R1; ?>" id="lxo01"/>
+                            <label class="main03_01" for="lxo01"  class="DUIQI"  />
+                              <span class="DUIQI"><?php echo Jmroute::$R1; ?></span>
+                            </label>
+                            <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R1]; ?></span></p>
                          </li>
                          <li class="clearfix">
-                         <label class="main03_01"><input type="radio" name="Extra[luxian]" value="花莲线" class="DUIQI" <?php if($user->extra['luxian']=="花莲线") echo 'checked="checked"'; ?>/>
-                            <span class="DUIQI">花莲线</span></label>
-                              <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R2]; ?></span></p>
-                              <span class="main03_03">太鲁阁公园~七星潭<span class="main03_03_In main03_03_In2">
-<img src="images/nima.jpg"/> <p class="main03_03_Inzi">七星潭位于花莲县新城乡北埔村，在花莲机场的东侧，七星潭是一个突出于美仑鼻一侧的海湾；七星潭从前是花莲发展。</p>
- </span></span>
+                             <input type="radio" name="Extra[luxian]" class="DUIQI main03_00" <?php if($user->extra['luxian']==Jmroute::$R2) echo 'checked="checked"'; ?>  value="<?php echo Jmroute::$R2; ?>" id="lxo02" />
+                             <label class="main03_01" for="lxo02"  class="DUIQI"  />
+                              <span class="DUIQI"><?php echo Jmroute::$R2; ?></span>
+                            </label>
+                            <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R2]; ?></span></p>
+                         </li>
+                         <li class="clearfix">
+                              <span class="main03_03"><a target="_blank" href="p16.html">线路详情</a></span>
                          </li>
                          <li class="clearfix red">
                               <p>为了满足各位家人的游览需求，行程中特设一天可供您选择的行程。请您根据喜好自行选择，数量有限，先到先得哦！</p>

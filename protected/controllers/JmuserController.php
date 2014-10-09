@@ -142,7 +142,10 @@ class JmuserController extends Controller
         }
         $errorMessage = "";
         $routeCount = Jmroute::getRouteCount($model->wave);
+        $extra = json_decode($model->extra, true);
+
         if (isset($_POST['LoginForm'])) {
+            $extra = $_POST['Extra'];
             $form=$_POST['LoginForm'];
             $translate = $model->attributeLabels();
             foreach ($form as $k => $v) {
@@ -154,7 +157,7 @@ class JmuserController extends Controller
             }
 
             foreach (Jmuser::extraFields() as $idx => $f) {
-                if (empty($_POST['Extra'][$f])) {
+                if (empty($extra[$f])) {
                     $fieldName = isset($translate[$f]) ? $translate[$f]:$f;
                     $errorMessage = "所有信息均为必填，缺少信息: {$fieldName}" ;
                 }
@@ -169,7 +172,7 @@ class JmuserController extends Controller
             $model->extra = json_encode($_POST['Extra']);
             $model->paper = json_encode($_POST['Paper']);
             if ( empty($errorMessage) ) {
-                $luxian=$_POST['Extra']['luxian'];
+                $luxian=$extra['luxian'];
                 
                 if (($routeCount[$luxian]) <= 0) {
                     $errorMessage = "路线选择失败" ;
