@@ -30,7 +30,6 @@
             <p class="El02_02">已提交信息，已选择旅游线路</p>
       </div>
       <p class="Elements03">
-          <a href="?r=site/p4" class="anniu" >修改个人信息</a>
           <a href="?r=site/r5" class="anniu" >查看出行信息</a>
           <a href="?r=site" class="anniu" >退出</a>
       </p>

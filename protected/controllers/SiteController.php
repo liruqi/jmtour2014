@@ -46,11 +46,8 @@ class SiteController extends Controller
                 if (strlen($initpasswd) > 6) {
                     $initpasswd = substr($initpasswd, strlen($initpasswd)-6);
                 }*/
-                if ($model->password == $form['password']) {
-                    $this->redirect("?r=site/r1");
-                } else {
-                    $this->redirect("?r=site/p1");
-                }
+                $this->redirect("?r=site/r1");
+                
                 return;
             } else {
                 $authCode = $identity->errorCode;

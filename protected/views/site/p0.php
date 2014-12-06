@@ -36,7 +36,8 @@
              } ?>
                         </span>
                   </div>
-                  <p class="red Elements01">注：您的初始密码是您的身份证后六位数字</p>
+                  <a style="color: red" href="forget.html">忘记密码？</a>
+                  </p>
                   <p class="Elements02"><input type="submit" class="anniu" value="登录"/></p>
 		</form>
             </div>

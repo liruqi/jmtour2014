@@ -33,4 +33,4 @@ CREATE TABLE jmuser (
 
 alter table jmuser add column extra text default '';
 alter table jmuser add column paper text default '';
-
+alter table jmuser add column departureport VARCHAR(128);

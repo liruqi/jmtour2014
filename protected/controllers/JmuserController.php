@@ -29,15 +29,15 @@ class JmuserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','dump'),
-				'users'=>array('admin'),
+				'users'=>array('admin','zhongmai','zhongqinglv'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				'users'=>array('admin'),
+				'users'=>array('admin','zhongmai','zhongqinglv'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('admin','zhongmai','zhongqinglv'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -66,21 +66,63 @@ class JmuserController extends Controller
         $objPHPExcel = new PHPExcel();
         $row = 1;
 
-        foreach (Jmuser::fields() as $col => $field) {
-            $labels = $model->attributeLabels();
+
+        $base = 0; 
+        $labels = $model->attributeLabels();
+        foreach (Jmuser::dumpFields() as $col => $field) {
             $name = isset( $labels[$field] ) ? $labels[$field] : $field;
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col , $row, $name);
+            $base += 1;
         }
+        
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($base , $row, "出生日期");
+        $base += 1;
+         
+        foreach (Jmuser::extraFields() as $col => $field) {
+            $name = isset( $labels[$field] ) ? $labels[$field] : $field;
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($base , $row, $name);
+            $base += 1;
+        }
+
+        foreach (Jmuser::paperFields() as $col => $field) {
+            $name = isset( $labels[$field] ) ? $labels[$field] : $field;
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($base , $row, $name);
+            $base += 1;
+        }
+
+        
         //var_dump($cnt, $data->getItemCount(),  $data->getTotalItemCount());
         $users = $data->getData( array("order" => "sysID"));
         foreach ($users as $key => $user)
         {
             // echo  "{$row}/" . count($users) . " " . $user->oa . "\n";
             $row += 1;
-            foreach (Jmuser::fields() as $col => $field) {
+            $base = 0; 
+            foreach (Jmuser::dumpFields() as $col => $field) {
                 $val = $user->$field;
                 $cell = $objPHPExcel->getActiveSheet()->getCellByColumnAndRow($col, $row);
                 $cell->setValueExplicit($val, PHPExcel_Cell_DataType::TYPE_STRING);
+                $base += 1;
+            }
+
+            $cell = $objPHPExcel->getActiveSheet()->getCellByColumnAndRow($base, $row);
+            $cell->setValueExplicit(substr($user->idcard,6,8));
+            $base += 1;
+
+            $extra = json_decode($user->extra, true);
+            foreach (Jmuser::extraFields() as $col => $field) {
+                $cell = $objPHPExcel->getActiveSheet()->getCellByColumnAndRow($base, $row);
+                $cell -> setValueExplicit($extra[$field], PHPExcel_Cell_DataType::TYPE_STRING);
+                $base += 1;
+            }
+
+            $paper = json_decode($user->paper, true);
+            foreach (Jmuser::paperFields() as $col => $field) {
+                
+                $cell = $objPHPExcel->getActiveSheet()->getCellByColumnAndRow($base, $row);
+                if (isset($paper[$field]))
+                $cell -> setValueExplicit($paper[$field], PHPExcel_Cell_DataType::TYPE_STRING);
+                $base += 1;
             }
         }
         $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
@@ -97,7 +139,8 @@ class JmuserController extends Controller
 	public function actionView($id)
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+            'model'=>$this->loadModel($id),
+            'submit'=>(strtolower(Yii::app()->getUser()->getName()) != "zhongmai")
 		));
 	}
 
@@ -148,6 +191,8 @@ class JmuserController extends Controller
             $extra = $_POST['Extra'];
             $form=$_POST['LoginForm'];
             $translate = $model->attributeLabels();
+            $errorMessage = "";
+            /*
             foreach ($form as $k => $v) {
                 $model->$k = $v;
                 if (empty($v)) {
@@ -155,7 +200,6 @@ class JmuserController extends Controller
                     $errorMessage = "所有信息均为必填，缺少信息: " . $fieldName;
                 }
             }
-
             foreach (Jmuser::extraFields() as $idx => $f) {
                 if (empty($extra[$f])) {
                     $fieldName = isset($translate[$f]) ? $translate[$f]:$f;
@@ -168,7 +212,7 @@ class JmuserController extends Controller
                     $errorMessage = "所有信息均为必填，缺少信息: {$fieldName}" ;
                 }
             }
-
+             */
             $model->extra = json_encode($_POST['Extra']);
             $model->paper = json_encode($_POST['Paper']);
             if ( empty($errorMessage) ) {
@@ -191,7 +235,9 @@ class JmuserController extends Controller
         $model->paper = json_decode($model->paper, true);;
         $this->renderPartial('update', 
             array(
-                'user'=>$model, 'error' => $errorMessage, 'route' => $routeCount 
+                'user'=>$model, 'error' => $errorMessage, 'route' => $routeCount,
+
+                'submit'=>(strtolower(Yii::app()->getUser()->getName()) != "zhongmai")
             )
         );
 	}
@@ -234,6 +280,7 @@ class JmuserController extends Controller
         }
 		$this->render('admin',array(
 			'dataProvider'=>$dataProvider,
+            'submit'=>(strtolower(Yii::app()->getUser()->getName()) != "zhongmai")
 		));
 	}
 

@@ -70,10 +70,42 @@ class ImportCommand extends  CConsoleCommand
                 $model->$k = $v;
                 $changedColumns[] = $k;
             }
-            if (count($changedColumns) == 0) {
+
+            $extra = json_decode($model->extra, true);
+            $extraMap = array(
+                29 => "clothes",
+                30 => "luxian",
+                31 => "分团号",
+                32 => "出入境领队",
+                33 => "游览陪同领队",
+                63 => "去程日期",
+                64 => "去程航班",
+                65 => "去程航班时间",
+                66 => "回程日期",
+                67 => "回程航班",
+                68 => "回程航班时间",
+            );
+            foreach ($extraMap as $k => $v) {
+                $cell = $objWorksheet->getCellByColumnAndRow($k, $row->getRowIndex());
+                if (PHPExcel_Shared_Date::isDateTime($cell)) {
+                    $extra[$v] = $cell->getFormattedValue();
+                } else {
+                    $extra[$v] = $cell->getCalculatedValue();
+                }
+            }
+            $model->extra = json_encode($extra);
+
+            $celltw = $objWorksheet->getCellByColumnAndRow(34, $row->getRowIndex());
+            $cellhk = $objWorksheet->getCellByColumnAndRow(40, $row->getRowIndex());
+            $paper = json_decode($model->paper, true);
+            $paper['twpassport'] = $celltw->getCalculatedValue();
+            $paper['hkpassport'] = $cellhk->getCalculatedValue();
+            $model->paper = json_encode($paper);
+
+            /*if (count($changedColumns) == 0) {
                 $ignore[] = $nsUser['oa'];
                 continue;
-            }
+            }*/
 	        if ($model->save()) {
                 file_put_contents("/tmp/import.log", "NS OK: " . json_encode($nsUser) . "\n", FILE_APPEND);
                 $yes[] = $nsUser['oa'];

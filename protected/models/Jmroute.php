@@ -2,7 +2,7 @@
 
 class Jmroute
 {
-    public static $R1 = "南投线";
+    public static $R1 = "台中线";
     public static $R2 = "花莲线";
     public static function path($wave) { 
         $w = intval (strrev($wave));
@@ -27,7 +27,7 @@ class Jmroute
 
     public static function getRouteCount($wave)
     {
-        $total = array("批次1"=>117, "批次2"=>86);
+        $total = array("批次1"=>1000, "批次2"=>1000);
         $rawdata = file_get_contents(self::path($wave));
         $routemap = array(self::$R1=>array(), self::$R2=>array());
         if ($rawdata) {

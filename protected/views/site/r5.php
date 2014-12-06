@@ -46,47 +46,8 @@ $(document).ready(function(){
                               <span class="main_r"><?php echo $user->gender; ?></span>
                          </li>
                          <li class="clearfix">
-                              <span class="main_l">身份证号码：</span>
-                              <span class="main_r"><?php echo $user->idcard; ?></span>
-                         </li>
-                         <li class="clearfix">
-                              <span class="main_l">出生日期：</span>
-                              <span class="main_r"><?php echo $user->birth(); ?></span>
-                         </li>
-                         <li class="clearfix">
-                              <span class="main_l">年龄：</span>
-                              <span class="main_r"><?php echo $user->age(); ?></span>
-                         </li>
-                         <li class="clearfix">
-                              <span class="main_l">国籍：</span>
-                              <span class="main_r main_rin"><?php echo $user->nation; ?></span>
-                         </li>
-                         <li class="clearfix">
-                              <span class="main_l">民族：</span>
-                              <span class="main_r main_rin"><?php echo $user->race; ?></span>
-                         </li>
-                         <li class="clearfix">
                               <span class="main_l">联系电话：</span>
                               <span class="main_r main_rin"><?php echo $user->phone; ?></span>
-                         </li>
-                    </ul>
-                    <ul class="main01_02">
-                         <li class="clearfix">
-                             <span class="main_l2">家庭住址：</span>
-                             <div class="main_r2 main_rr clearfix">
-                             <span class="main_rin">
-                            <?php echo $user->extra['homecity']."市".
-                                        $user->extra['homearea']. $user->extra['homeaddr']; ?></span>
-                             </div>
-                         </li>
-                         <li class="clearfix">
-                             <span class="main_l2">户籍所在地：</span>
-                             <div class="main_r2 main_rr clearfix">
-                                 <span class="main_rin">
-                            <?php echo $user->extra['hukoucity']."市".
-                                        $user->extra['hukouarea']. $user->extra['hukouaddr']; ?>
-                                </span>
-                             </div>
                          </li>
                     </ul>
                     <ul class="main01_03 clearfix">
@@ -103,51 +64,15 @@ $(document).ready(function(){
                               </span>
                          </li>
                          <li class="clearfix">
-                              <span class="main_l">岗位职级：</span>
-                              <span class="main_r">
-                              <span class="main_rin"><?php echo $user->title; ?></span>
-                              </span>
-                         </li>
-                         <li class="clearfix">
-                              <span class="main_l">身高：</span>
-                              <span class="main_r">
-                              <span class="main_rin"><?php echo $user->height; ?><em>kg</em></span>
-                              </span>
-                         </li>
-                         <li class="clearfix">
-                              <span class="main_l">体重：</span>
-                              <span class="main_r">
-                              <span class="main_rin"><?php echo $user->weight; ?><em>cm</em></span>
-                              </span>
-                         </li>
-                         <li class="clearfix">
                               <span class="main_l">餐饮忌口：</span>
                               <span class="main_r">
                                    <span class="main_rin"><?php echo $user->eat; ?></span>
                               </span>
                          </li>
-                         <li class="clearfix">
-                              <span class="main_l">最高学历：</span>
+                        <li class="clearfix">
+                              <span class="main_l">服装尺寸：</span>
                               <span class="main_r">
-                                   <span class="main_rin"><?php echo $user->extra['education']; ?></span>
-                              </span>
-                         </li>
-                         <li class="clearfix">
-                              <span class="main_l">毕业院校：</span>
-                              <span class="main_r">
-                                   <span class="main_rin"><?php echo $user->extra['school']; ?></span>
-                              </span>
-                         </li>
-                         <li class="clearfix">
-                              <span class="main_l">专业：</span>
-                              <span class="main_r">
-                                   <span class="main_rin"><?php echo $user->extra['major']; ?></span>
-                              </span>
-                         </li>
-                         <li class="clearfix">
-                              <span class="main_l">毕业时间：</span>
-                              <span class="main_r">
-                                   <span class="main_rin"><?php echo $user->extra['graduate']; ?></span>
+                              <span class="main_rin"><?php echo $user->extra["clothes"]; ?></span>
                               </span>
                          </li>
                     </ul>
@@ -179,21 +104,20 @@ $(document).ready(function(){
                <!--<label class="mt01 mt_xx"><input type="radio" name="zhuzhi" class="mt_01_01 DUIQI" checked="checked"/><span class="DUIQI">大陆居民往来台湾通行证信息</span></label>
                <label class="mt02 mt_xx"><input type="radio" name="zhuzhi" class="mt_02_01 DUIQI"/><span class="DUIQI">往来港澳通行证信息+护照信息</span></label>-->               
                <div class="main_Area02_In">
-
-                              <h2 class="ma01i01 red">等待您的提交</h2>
-                </div>
-    
+                              <ul class="ma01i02 clearfix">
+                                   <li class="clearfix mli">
+                                        <span class="main_l">签注类别：</span>
+                                        <span class="main_r"><span class="main_rin"><?php echo $user->endorse; ?></span></span>
+                                   </li>
+                              </ul>
+               </div> 
            </div>
            <div class="main_Area03">
                <h2 class="mt00">三、行程信息</h2>
                <ul class="ma01i02 clearfix">
                     <li class="clearfix mli">
                          <span class="main_l">出发口岸：</span>
-                         <span class="main_r main_rr"><span class="main_rin ">等待公司安排</span></span>
-                    </li>
-                    <li class="clearfix mli">
-                         <span class="main_l">往返机票：</span>
-                         <span class="main_r main_rr"><span class="main_rin red">等待公司安排</span></span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->departureport; ?></span></span>
                     </li>
                     <li class="clearfix mli">
                          <span class="main_l">入住酒店：</span>
@@ -216,6 +140,43 @@ $(document).ready(function(){
                          <span class="main_l">自选线路：</span>
                          <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['luxian']; ?></span></span>
                     </li>
+                    
+                    <li class="clearfix mli">
+                         <span class="main_l">分团号：</span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['分团号']; ?></span></span>
+                    </li>
+                    <li class="clearfix mli">
+                         <span class="main_l">出入境领队：</span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['出入境领队']; ?></span></span>
+                    </li>
+                    <li class="clearfix mli">
+                         <span class="main_l">游览陪同领队：</span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['游览陪同领队']; ?></span></span>
+                    </li>
+                    <li class="clearfix mli">
+                         <span class="main_l">去程日期：</span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['去程日期']; ?></span></span>
+                    </li>
+                    <li class="clearfix mli">
+                         <span class="main_l">去程航班：</span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['去程航班']; ?></span></span>
+                    </li>
+                    <li class="clearfix mli">
+                         <span class="main_l">去程航班时间：</span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['去程航班时间']; ?></span></span>
+                    </li>
+                    <li class="clearfix mli">
+                         <span class="main_l">回程日期：</span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['回程日期']; ?></span></span>
+                    </li>
+                    <li class="clearfix mli">
+                         <span class="main_l">回程航班：</span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['回程航班']; ?></span></span>
+                    </li>
+                    <li class="clearfix mli">
+                         <span class="main_l">回程航班时间：</span>
+                         <span class="main_r main_rr"><span class="main_rin"><?php echo $user->extra['回程航班时间']; ?></span></span>
+                    </li>
                </ul>
            </div>
       </div>
@@ -224,6 +185,7 @@ $(document).ready(function(){
 
       <p class="Elements03">
           <a href="?r=site/r1" class="anniu" >返回</a>
+          <a class="anniu" href="javascript:void(0)" onClick="javascript:window.print()">打印</a>
       </p>
 
 </div>

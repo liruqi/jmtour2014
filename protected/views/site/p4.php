@@ -254,17 +254,19 @@ function CLASS_LIANDONG_YAO(cityinfo)
                     <ul class="clearfix">
                          <li class="clearfix">
                             <input type="radio" name="Extra[luxian]" class="DUIQI main03_00" <?php if($user->extra['luxian']==Jmroute::$R1) echo 'checked="checked"'; ?> value="<?php echo Jmroute::$R1; ?>" id="lxo01"/>
-                            <label class="main03_01" for="lxo01"  class="DUIQI"  />
+                            <label class="main03_01" for="lxo01"  class="DUIQI"  >
                               <span class="DUIQI"><?php echo Jmroute::$R1; ?></span>
                             </label>
                             <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R1]; ?></span></p>
                          </li>
                          <li class="clearfix">
-                             <input type="radio" name="Extra[luxian]" class="DUIQI main03_00" <?php if($user->extra['luxian']==Jmroute::$R2) echo 'checked="checked"'; ?>  value="<?php echo Jmroute::$R2; ?>" id="lxo02" />
-                             <label class="main03_01" for="lxo02"  class="DUIQI"  />
-                              <span class="DUIQI"><?php echo Jmroute::$R2; ?></span>
+                            <input type="radio" name="Extra[luxian]" class="DUIQI main03_00" 
+                            <?php if($user->extra['luxian']==Jmroute::$R2) { echo 'checked="checked"'; } else { echo 'disabled'; } ?>
+                            value="<?php echo Jmroute::$R2; ?>" id="lxo02" />
+                            <label class="main03_01" for="lxo02"  class="DUIQI"  >
+                            <span class="DUIQI"><?php echo Jmroute::$R2; ?></span>
                             </label>
-                            <p class="main03_02">剩余数量：<span class="red"><?php echo $route[Jmroute::$R2]; ?></span></p>
+                            <p class="main03_02">剩余数量：<span class="red">0</span></p>
                          </li>
                          <li class="clearfix">
                               <span class="main03_03"><a target="_blank" href="p16.html">线路详情</a></span>

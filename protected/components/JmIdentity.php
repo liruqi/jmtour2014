@@ -31,8 +31,30 @@ class JmIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
         } else if($model->password===$this->password) {
 			$this->errorCode=self::ERROR_NONE;
-        } else if($initpasswd===$this->password) {
-			$this->errorCode=self::ERROR_NONE;
+        } else if(intval($initpasswd)==intval($this->password)) {
+            if (in_array($this->username, array(1010672,
+                1010710,
+                10107162,
+                10107186,
+                10107187,
+                10107242,
+                10107271,
+                10107316,
+                10107323,
+                10107404,
+                10107498,
+                10107598,
+                10107713,
+                10107740,
+                10107823,
+                10107871,
+                10107984,
+                1018232,
+                1018243,
+            19540824)))
+            $this->errorCode=self::ERROR_NONE;
+            else 
+            $this->errorCode=self::ERROR_PASSWORD_INVALID;
 		} else {
             header("X-authenticate: ".$this->username." - ".$initpasswd . " <> " . $this->password); 
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
